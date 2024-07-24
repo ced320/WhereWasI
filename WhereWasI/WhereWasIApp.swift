@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct WhereWasIApp: App {
+    
+    @State private var locationProvider = LocationProvider()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            VisitsView()
+                .environment(locationProvider)
         }
     }
 }
