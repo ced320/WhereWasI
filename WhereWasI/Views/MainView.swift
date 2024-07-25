@@ -15,24 +15,31 @@ struct MainView: View {
     @Environment(CurrentLocationProvider.self) private var locationProvider
     @State var bottomSheetPosition: BottomSheetPosition = .relative(BottomSheetPositioning.medium.rawValue)
     @State var showBottomSheet = true
+    //@State var alwaysLocationTrackingEnabled = false
     
     var body: some View {
-        AllLocationsView()
-            .environment(locationProvider)
-            .bottomSheet(bottomSheetPosition: self.$bottomSheetPosition, switchablePositions: [
-                .relativeBottom(BottomSheetPositioning.small.rawValue),
-                .relative(BottomSheetPositioning.medium.rawValue),
-                .relativeTop(BottomSheetPositioning.large.rawValue)
-            ], headerContent: {Text("Visits")}) {
-                //The list of the most popular songs of the artist.
-                ScrollView {
-                    //SliderMinutesBack(percent: $intervallToShowOneToFourteen)
-                    //PickLocationView(typeOfLocation: $typeOfLocation)
-                    Text("Content")
+        if locationProvider.authorizationStatus == .authorizedAlways {
+            AllLocationsView()
+                .environment(locationProvider)
+                .bottomSheet(bottomSheetPosition: self.$bottomSheetPosition, switchablePositions: [
+                    .relativeBottom(BottomSheetPositioning.small.rawValue),
+                    .relative(BottomSheetPositioning.medium.rawValue),
+                    .relativeTop(BottomSheetPositioning.large.rawValue)
+                ], headerContent: {HeadlineView().environment(locationProvider).padding()}) {
+                    //The list of the most popular songs of the artist.
+                    ScrollView {
+                        //SliderMinutesBack(percent: $intervallToShowOneToFourteen)
+                        //PickLocationView(typeOfLocation: $typeOfLocation)
+                        Text("Status: \(locationProvider.authorizationStatus)")
+                            .padding()
+                    }
                 }
-            }
-            .customAnimation(.snappy.speed(2))//(.easeIn.speed(3)) //.linear.speed(1.5))
-            .customBackground(.thickMaterial)
+                .customAnimation(.snappy.speed(2))//(.easeIn.speed(3)) //.linear.speed(1.5))
+                .customBackground(.thickMaterial)
+        } else {
+            EnableLocationTrackingView()
+        }
+
     }
 }
 

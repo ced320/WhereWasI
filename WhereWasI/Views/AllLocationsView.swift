@@ -21,7 +21,9 @@ struct AllLocationsView: View {
                 .mapOverlayLevel(level: .aboveLabels)
                 .stroke(Gradient(colors: [.black,.blue]), lineWidth: 4)
         }
-    }}
+    }
+
+}
 
 #Preview {
     AllLocationsView()

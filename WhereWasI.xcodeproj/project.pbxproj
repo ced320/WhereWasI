@@ -19,6 +19,8 @@
 		901C0AE92C527F6200811AA5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AE82C527F6200811AA5 /* MainView.swift */; };
 		901C0AEB2C5280DB00811AA5 /* AllLocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AEA2C5280DB00811AA5 /* AllLocationsView.swift */; };
 		901C0AED2C52813500811AA5 /* MovementLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AEC2C52813500811AA5 /* MovementLocations.swift */; };
+		901C0AEF2C5289A100811AA5 /* HeadlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AEE2C5289A100811AA5 /* HeadlineView.swift */; };
+		901C0AF12C528CD200811AA5 /* EnableLocationTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AF02C528CD200811AA5 /* EnableLocationTrackingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		901C0AE82C527F6200811AA5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		901C0AEA2C5280DB00811AA5 /* AllLocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsView.swift; sourceTree = "<group>"; };
 		901C0AEC2C52813500811AA5 /* MovementLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementLocations.swift; sourceTree = "<group>"; };
+		901C0AEE2C5289A100811AA5 /* HeadlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadlineView.swift; sourceTree = "<group>"; };
+		901C0AF02C528CD200811AA5 /* EnableLocationTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableLocationTrackingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,8 @@
 				901C0AEA2C5280DB00811AA5 /* AllLocationsView.swift */,
 				901057E42C516FAD00AB6502 /* VisitsView.swift */,
 				901C0AEC2C52813500811AA5 /* MovementLocations.swift */,
+				901C0AEE2C5289A100811AA5 /* HeadlineView.swift */,
+				901C0AF02C528CD200811AA5 /* EnableLocationTrackingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -205,11 +211,13 @@
 				901057E52C516FAD00AB6502 /* VisitsView.swift in Sources */,
 				901C0AEB2C5280DB00811AA5 /* AllLocationsView.swift in Sources */,
 				901C0AE92C527F6200811AA5 /* MainView.swift in Sources */,
+				901C0AF12C528CD200811AA5 /* EnableLocationTrackingView.swift in Sources */,
 				90138C4E2C51717F00FD0386 /* CurrentLocationProvider.swift in Sources */,
 				901C0AE12C5251E100811AA5 /* PersistenceLocations.swift in Sources */,
 				90138C502C517CE900FD0386 /* MapLocation.swift in Sources */,
 				901C0AE42C52529C00811AA5 /* PastLocations.xcdatamodeld in Sources */,
 				901057B62C516A3500AB6502 /* WhereWasIApp.swift in Sources */,
+				901C0AEF2C5289A100811AA5 /* HeadlineView.swift in Sources */,
 				901C0AED2C52813500811AA5 /* MovementLocations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

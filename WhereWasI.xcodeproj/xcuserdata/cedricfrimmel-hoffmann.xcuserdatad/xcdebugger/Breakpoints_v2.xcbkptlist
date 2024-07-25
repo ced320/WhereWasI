@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "FD7F09E0-BB6D-47B3-A3F5-D97E82596877"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C7562F8E-0048-4B3D-9219-EEF6A3F8FB6C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WhereWasI/Model/PersistenceLocations.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "getAllPastLocations(daysToGoBack:desiredAccuracyOfLocations:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0CB48194-2F11-4270-8B0C-E3E189FEDC41"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WhereWasI/MVC/CurrentLocationProvider.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "getAllLocationsStored(daysToGoBack:desiredAccuracyInMeter:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "914A085B-1E77-4707-B40B-81F0B2E2C784"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WhereWasI/Views/AllLocationsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "914A085B-1E77-4707-B40B-81F0B2E2C784 - 5f84853553fa9714"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; _MapKit_SwiftUI.TupleMapContent&lt;(_MapKit_SwiftUI.UserAnnotation&lt;_MapKit_SwiftUI.DefaultUserAnnotationContent&gt;, SwiftUI.ForEach&lt;Swift.Array&lt;WhereWasI.MapLocation&gt;, Foundation.UUID, _MapKit_SwiftUI.Marker&lt;SwiftUI.Text&gt;&gt;, &lt;&lt;opaque return type of _MapKit_SwiftUI.MapContent.stroke&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(_: &#x3c4;_1_0, lineWidth: CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0)&gt; in WhereWasI.AllLocationsView.body.getter : some"
+                  moduleName = "WhereWasI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cedricfrimmel-hoffmann/Developer/WhereWasI/WhereWasI/Views/AllLocationsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17">
+               </Location>
+               <Location
+                  uuid = "914A085B-1E77-4707-B40B-81F0B2E2C784 - 1c3f10802008af44"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (WhereWasI.MapLocation) -&gt; _MapKit_SwiftUI.Marker&lt;SwiftUI.Text&gt; in closure #1 () -&gt; _MapKit_SwiftUI.TupleMapContent&lt;(_MapKit_SwiftUI.UserAnnotation&lt;_MapKit_SwiftUI.DefaultUserAnnotationContent&gt;, SwiftUI.ForEach&lt;Swift.Array&lt;WhereWasI.MapLocation&gt;, Foundation.UUID, _MapKit_SwiftUI.Marker&lt;SwiftUI.Text&gt;&gt;, &lt;&lt;opaque return type of _MapKit_SwiftUI.MapContent.stroke&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(_: &#x3c4;_1_0, lineWidth: CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0)&gt; in WhereWasI.AllLocationsView.body.getter : some"
+                  moduleName = "WhereWasI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cedricfrimmel-hoffmann/Developer/WhereWasI/WhereWasI/Views/AllLocationsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "520BA7C9-2DA7-428F-9BE7-E00A2213F9A3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WhereWasI/Views/AllLocationsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8599AFA7-907D-499C-93D0-1D1E2DFA1C4C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WhereWasI/WhereWasIApp.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

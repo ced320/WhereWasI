@@ -64,6 +64,24 @@ struct PersistentLocationController {
         return allSortedPoints
     }
     
+    func addMovementLocationEntity(movementLocation location: CLLocation) {
+        let locationData = try? NSKeyedArchiver.archivedData(withRootObject: location, requiringSecureCoding: true)
+        let date = location.timestamp
+        let movementEntity = MovementLocationEntity(context: self.container.viewContext)
+        movementEntity.date = date
+        movementEntity.movementLocation = locationData
+        saveData()
+    }
+    
+    func addVisitLocationEntity(visitLocation location: CLVisit) {
+        let visitData = try? NSKeyedArchiver.archivedData(withRootObject: location, requiringSecureCoding: true)
+        let date = location.arrivalDate
+        let visitEntity = VisitedLocationEntity(context: self.container.viewContext)
+        visitEntity.date = date
+        visitEntity.visitedLocation = visitData
+        saveData()
+    }
+    
     private func saveData() {
         do {
             try container.viewContext.save()// managedObjectContext.save()
@@ -127,23 +145,5 @@ struct PersistentLocationController {
             }
         }
         return searchedLocations
-    }
-    
-    private func addMovementLocationEntity(movementLocation location: CLLocation) {
-        let locationData = try? NSKeyedArchiver.archivedData(withRootObject: location, requiringSecureCoding: true)
-        let date = location.timestamp
-        let movementEntity = MovementLocationEntity(context: self.container.viewContext)
-        movementEntity.date = date
-        movementEntity.movementLocation = locationData
-        saveData()
-    }
-    
-    private func addVisitLocationEntity(visitLocation location: CLVisit) {
-        let visitData = try? NSKeyedArchiver.archivedData(withRootObject: location, requiringSecureCoding: true)
-        let date = location.arrivalDate
-        let visitEntity = VisitedLocationEntity(context: self.container.viewContext)
-        visitEntity.date = date
-        visitEntity.visitedLocation = visitData
-        saveData()
     }
 }

@@ -12,27 +12,42 @@ import CoreLocation
 @Observable class CurrentLocationProvider:  NSObject, CLLocationManagerDelegate {
     
     private var locationManager = CLLocationManager()
-    var currentUserLocation: CLLocation? = nil
+    var authorizationStatus: CLAuthorizationStatus = .notDetermined
     
     override init() {
         super.init()
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.startUpdatingLocation()
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.startMonitoringSignificantLocationChanges()
+        self.locationManager.startMonitoringVisits()
+        //self.locationManager.startUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        self.currentUserLocation = location
+        PersistentLocationController.shared.addMovementLocationEntity(movementLocation: location)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
+        PersistentLocationController.shared.addVisitLocationEntity(visitLocation: visit)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        DispatchQueue.main.async {
+            self.authorizationStatus = status
+        }
         switch status {
-        case .authorizedWhenInUse, .authorizedAlways:
-            self.locationManager.startUpdatingLocation()
-        default:
-            self.locationManager.stopUpdatingLocation()
+        case .notDetermined:
+            break
+        case .authorizedWhenInUse:
+            print("Location access granted for 'When In Use'.")
+        case .authorizedAlways:
+            print("Location access granted for 'Always'.")
+        case .restricted, .denied:
+            print("Location access denied or restricted.")
+        @unknown default:
+            break
         }
     }
     
