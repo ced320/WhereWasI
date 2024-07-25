@@ -9,10 +9,9 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-@Observable class LocationProvider:  NSObject, CLLocationManagerDelegate {
+@Observable class CurrentLocationProvider:  NSObject, CLLocationManagerDelegate {
     
     private var locationManager = CLLocationManager()
-    
     var currentUserLocation: CLLocation? = nil
     
     override init() {
@@ -37,12 +36,16 @@ import CoreLocation
         }
     }
     
-    func getTestLocations() -> [MapLocationMovement] {
-        let loc1 = MapLocationMovement(coordinate: CLLocationCoordinate2D(latitude: 49.68085209853679, longitude: 8.616717557314166), time: Date())
-        let loc2 = MapLocationMovement(coordinate: CLLocationCoordinate2D(latitude: 49.68108638931229, longitude: 8.619989695011895), time: Date())
-        let loc3 = MapLocationMovement(coordinate: CLLocationCoordinate2D(latitude: 49.72624023185234, longitude: 8.442843393812112), time: Date())
-        let result = [loc1, loc2, loc3]
-        return result
+    func getVisitedLocationFromStorage(daysToGoBack days: Int, desiredAccuracyInMeter: CLLocationAccuracy) -> [MapLocation] {
+        PersistentLocationController.shared.getPastVisits(daysToGoBack: days, desiredAccuracyOfLocations: desiredAccuracyInMeter)
+    }
+    
+    func getMovementLocationFromStorage(daysToGoBack days: Int, desiredAccuracyInMeter: CLLocationAccuracy) -> [MapLocation] {
+        PersistentLocationController.shared.getPastMovements(daysToGoBack: days, desiredAccuracyOfLocations: desiredAccuracyInMeter)
+    }
+    
+    func getAllLocationsStored(daysToGoBack days: Int, desiredAccuracyInMeter: CLLocationAccuracy) -> [MapLocation] {
+        PersistentLocationController.shared.getAllPastLocations(daysToGoBack: days, desiredAccuracyOfLocations: desiredAccuracyInMeter)
     }
     
 }

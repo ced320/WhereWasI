@@ -10,12 +10,14 @@ import SwiftUI
 @main
 struct WhereWasIApp: App {
     
-    @State private var locationProvider = LocationProvider()
+    @State private var locationProvider = CurrentLocationProvider()
+    //let persistenceController = PersistenceController.shared
     
     var body: some Scene {
         WindowGroup {
-            VisitsView()
+            MainView()
                 .environment(locationProvider)
+                //.environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

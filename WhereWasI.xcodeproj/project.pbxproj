@@ -11,9 +11,14 @@
 		901057BA2C516A3800AB6502 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 901057B92C516A3800AB6502 /* Assets.xcassets */; };
 		901057BD2C516A3800AB6502 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 901057BC2C516A3800AB6502 /* Preview Assets.xcassets */; };
 		901057E52C516FAD00AB6502 /* VisitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901057E42C516FAD00AB6502 /* VisitsView.swift */; };
-		90138C4E2C51717F00FD0386 /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90138C4D2C51717F00FD0386 /* LocationProvider.swift */; };
-		90138C502C517CE900FD0386 /* MapLocationMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90138C4F2C517CE900FD0386 /* MapLocationMovement.swift */; };
-		90138C532C517E1A00FD0386 /* MapLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90138C522C517E1A00FD0386 /* MapLocation.swift */; };
+		90138C4E2C51717F00FD0386 /* CurrentLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90138C4D2C51717F00FD0386 /* CurrentLocationProvider.swift */; };
+		90138C502C517CE900FD0386 /* MapLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90138C4F2C517CE900FD0386 /* MapLocation.swift */; };
+		901C0AE12C5251E100811AA5 /* PersistenceLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AE02C5251E100811AA5 /* PersistenceLocations.swift */; };
+		901C0AE42C52529C00811AA5 /* PastLocations.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AE22C52529C00811AA5 /* PastLocations.xcdatamodeld */; };
+		901C0AE72C527CA200811AA5 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 901C0AE62C527CA200811AA5 /* BottomSheet */; };
+		901C0AE92C527F6200811AA5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AE82C527F6200811AA5 /* MainView.swift */; };
+		901C0AEB2C5280DB00811AA5 /* AllLocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AEA2C5280DB00811AA5 /* AllLocationsView.swift */; };
+		901C0AED2C52813500811AA5 /* MovementLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AEC2C52813500811AA5 /* MovementLocations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,9 +29,13 @@
 		901057BE2C516A3800AB6502 /* WhereWasI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhereWasI.entitlements; sourceTree = "<group>"; };
 		901057E32C516E9400AB6502 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		901057E42C516FAD00AB6502 /* VisitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsView.swift; sourceTree = "<group>"; };
-		90138C4D2C51717F00FD0386 /* LocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
-		90138C4F2C517CE900FD0386 /* MapLocationMovement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationMovement.swift; sourceTree = "<group>"; };
-		90138C522C517E1A00FD0386 /* MapLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocation.swift; sourceTree = "<group>"; };
+		90138C4D2C51717F00FD0386 /* CurrentLocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationProvider.swift; sourceTree = "<group>"; };
+		90138C4F2C517CE900FD0386 /* MapLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocation.swift; sourceTree = "<group>"; };
+		901C0AE02C5251E100811AA5 /* PersistenceLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceLocations.swift; sourceTree = "<group>"; };
+		901C0AE32C52529C00811AA5 /* PastLocations.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PastLocations.xcdatamodel; sourceTree = "<group>"; };
+		901C0AE82C527F6200811AA5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		901C0AEA2C5280DB00811AA5 /* AllLocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsView.swift; sourceTree = "<group>"; };
+		901C0AEC2C52813500811AA5 /* MovementLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementLocations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				901C0AE72C527CA200811AA5 /* BottomSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +93,10 @@
 		901057E02C516CCD00AB6502 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				901C0AE82C527F6200811AA5 /* MainView.swift */,
+				901C0AEA2C5280DB00811AA5 /* AllLocationsView.swift */,
 				901057E42C516FAD00AB6502 /* VisitsView.swift */,
+				901C0AEC2C52813500811AA5 /* MovementLocations.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -91,7 +104,7 @@
 		901057E12C516CD500AB6502 /* MVC */ = {
 			isa = PBXGroup;
 			children = (
-				90138C4D2C51717F00FD0386 /* LocationProvider.swift */,
+				90138C4D2C51717F00FD0386 /* CurrentLocationProvider.swift */,
 			);
 			path = MVC;
 			sourceTree = "<group>";
@@ -99,7 +112,9 @@
 		901057E22C516CDD00AB6502 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				90138C4F2C517CE900FD0386 /* MapLocationMovement.swift */,
+				901C0AE02C5251E100811AA5 /* PersistenceLocations.swift */,
+				90138C4F2C517CE900FD0386 /* MapLocation.swift */,
+				901C0AE22C52529C00811AA5 /* PastLocations.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -107,7 +122,6 @@
 		90138C512C517E0600FD0386 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				90138C522C517E1A00FD0386 /* MapLocation.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -128,6 +142,9 @@
 			dependencies = (
 			);
 			name = WhereWasI;
+			packageProductDependencies = (
+				901C0AE62C527CA200811AA5 /* BottomSheet */,
+			);
 			productName = WhereWasI;
 			productReference = 901057B22C516A3500AB6502 /* WhereWasI.app */;
 			productType = "com.apple.product-type.application";
@@ -156,6 +173,9 @@
 				Base,
 			);
 			mainGroup = 901057A92C516A3500AB6502;
+			packageReferences = (
+				901C0AE52C527CA200811AA5 /* XCRemoteSwiftPackageReference "BottomSheet" */,
+			);
 			productRefGroup = 901057B32C516A3500AB6502 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -183,10 +203,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				901057E52C516FAD00AB6502 /* VisitsView.swift in Sources */,
-				90138C532C517E1A00FD0386 /* MapLocation.swift in Sources */,
-				90138C4E2C51717F00FD0386 /* LocationProvider.swift in Sources */,
-				90138C502C517CE900FD0386 /* MapLocationMovement.swift in Sources */,
+				901C0AEB2C5280DB00811AA5 /* AllLocationsView.swift in Sources */,
+				901C0AE92C527F6200811AA5 /* MainView.swift in Sources */,
+				90138C4E2C51717F00FD0386 /* CurrentLocationProvider.swift in Sources */,
+				901C0AE12C5251E100811AA5 /* PersistenceLocations.swift in Sources */,
+				90138C502C517CE900FD0386 /* MapLocation.swift in Sources */,
+				901C0AE42C52529C00811AA5 /* PastLocations.xcdatamodeld in Sources */,
 				901057B62C516A3500AB6502 /* WhereWasIApp.swift in Sources */,
+				901C0AED2C52813500811AA5 /* MovementLocations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +352,7 @@
 				INFOPLIST_FILE = WhereWasI/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This enables the app to show your current location";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -361,6 +386,7 @@
 				INFOPLIST_FILE = WhereWasI/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This enables the app to show your current location";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -399,6 +425,39 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		901C0AE52C527CA200811AA5 /* XCRemoteSwiftPackageReference "BottomSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lucaszischka/BottomSheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		901C0AE62C527CA200811AA5 /* BottomSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 901C0AE52C527CA200811AA5 /* XCRemoteSwiftPackageReference "BottomSheet" */;
+			productName = BottomSheet;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		901C0AE22C52529C00811AA5 /* PastLocations.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				901C0AE32C52529C00811AA5 /* PastLocations.xcdatamodel */,
+			);
+			currentVersion = 901C0AE32C52529C00811AA5 /* PastLocations.xcdatamodel */;
+			name = PastLocations.xcdatamodeld;
+			path = "/Users/cedricfrimmel-hoffmann/Developer/WhereWasI/WhereWasI/Model/PastLocations.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 901057AA2C516A3500AB6502 /* Project object */;
 }
