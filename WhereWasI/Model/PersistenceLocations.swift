@@ -30,6 +30,7 @@ struct PersistentLocationController {
     }
     
     func getPastMovements(daysToGoBack days: Int, desiredAccuracyOfLocations: CLLocationAccuracy) -> [MapLocation] {
+        print(NSDate(timeIntervalSince1970: Date().timeIntervalSince1970 - Double(60*60*24*days)))
         return getMovementLocationBetweenDates(startDateLongerAgo: NSDate(timeIntervalSince1970: Date().timeIntervalSince1970 - Double(60*60*24*days)), endDateCloserToRightNow: NSDate(), desiredAccuracyInMeter: desiredAccuracyOfLocations)
     }
     

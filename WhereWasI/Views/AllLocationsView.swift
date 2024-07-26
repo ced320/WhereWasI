@@ -12,9 +12,9 @@ struct AllLocationsView: View {
     
     @Environment(CurrentLocationProvider.self) private var locationProvider
     @Binding var locationsToShow: ShowableLocations
+    @Binding var daysToGoBack: Int
+    @Binding var desiredAccuracy: CLLocationAccuracy 
     @State private var locations = [MapLocation]()
-    @State private var daysToGoBack = 7
-    @State private var desiredAccuracy: CLLocationAccuracy = 500
     
     
     var body: some View {
@@ -34,6 +34,12 @@ struct AllLocationsView: View {
             .onChange(of: locationsToShow) {
                 calculateLocationsToShow()
             }
+            .onChange(of: daysToGoBack) {
+                calculateLocationsToShow()
+            }
+            .onChange(of: desiredAccuracy) {
+                calculateLocationsToShow()
+            }
         }
     }
     
@@ -41,10 +47,6 @@ struct AllLocationsView: View {
         switch locationsToShow {
         case .movement:
             locations = locationProvider.getMovementLocationFromStorage(daysToGoBack: daysToGoBack, desiredAccuracyInMeter: desiredAccuracy)
-            print(locations.count)
-            for location in locations {
-                print(location)
-            }
         case .visit:
             locations = locationProvider.getVisitedLocationFromStorage(daysToGoBack: daysToGoBack, desiredAccuracyInMeter: desiredAccuracy)
         case .all:

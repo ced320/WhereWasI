@@ -17,12 +17,15 @@ struct MainView: View {
     @State var showBottomSheet = true
     
     @AppStorage("locationsToShow") private var locationsToShow = ShowableLocations.all
+    @AppStorage("showDaysBackSliderValue") private var timeSliderValue = 1.0
+    @AppStorage("showDaysToGoBack") private var daysToGoBack = 1
+    @AppStorage("desiredAccuracy") private var desiredAccuracyInMeter: CLLocationAccuracy = 250
     //@State var alwaysLocationTrackingEnabled = false
     
     var body: some View {
         
         TabView {
-            AllLocationsView(locationsToShow: $locationsToShow)
+            AllLocationsView(locationsToShow: $locationsToShow,daysToGoBack: $daysToGoBack, desiredAccuracy: $desiredAccuracyInMeter)
                 .environment(locationProvider)
                 .bottomSheet(bottomSheetPosition: self.$bottomSheetPosition, switchablePositions: [
                     .relative(BottomSheetPositioning.small.rawValue),
@@ -31,15 +34,13 @@ struct MainView: View {
                 ], headerContent: {headLineView}) {
                     //The list of the most popular songs of the artist.
                     VStack {
-                        Picker("Points to look at", selection: $locationsToShow) {
-                            ForEach(ShowableLocations.allCases, id: \.self) { locationType in
-                                Text(locationType.rawValue)
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                        .padding()
-                        Text("Currently selected: \(locationsToShow.rawValue)")
+                        pickerLocationKind
+                        timeSlider
+                        accuracySlider
+
+                        
                     }
+                    .padding()
                     
 
                 }
@@ -55,6 +56,9 @@ struct MainView: View {
                     Text("Settings")
                 }
         }
+        .onChange(of: timeSliderValue) {
+            updateDaysToGoBack()
+        }
     }
     
     var headLineView: some View {
@@ -69,6 +73,50 @@ struct MainView: View {
             Text("No access to location of user")
                 .font(.title)
         }
+    }
+    
+    var timeSlider: some View {
+        VStack {
+            Slider(value: $timeSliderValue, in: 1...7, step: 1) {
+                    Text("Show past \(Int(timeSliderValue))")
+
+                } minimumValueLabel: {
+                    Text("1")
+                } maximumValueLabel: {
+                    Text("7")
+                }
+            if(daysToGoBack <= 1) {
+                Text("Last day is shown")
+            } else {
+                Text("Last \(daysToGoBack) days are shown")
+            }
+        }
+    }
+    
+    var accuracySlider: some View {
+        VStack {
+            Slider(value: $desiredAccuracyInMeter, in: 10...1000, step: 1) {
+                } minimumValueLabel: {
+                    Text("10m")
+                } maximumValueLabel: {
+                    Text("1000m")
+                }
+                Text("Selected GPS Accuracy is \(desiredAccuracyInMeter) meters")
+        }
+    }
+    
+    var pickerLocationKind: some View {
+        Picker("Points to look at", selection: $locationsToShow) {
+            ForEach(ShowableLocations.allCases, id: \.self) { locationType in
+                Text(locationType.rawValue)
+            }
+        }
+        .pickerStyle(.segmented)
+        .padding()
+    }
+    
+    private func updateDaysToGoBack() {
+        daysToGoBack = Int(timeSliderValue)
     }
 }
 
