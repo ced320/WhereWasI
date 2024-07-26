@@ -15,40 +15,63 @@ struct MainView: View {
     @Environment(CurrentLocationProvider.self) private var locationProvider
     @State var bottomSheetPosition: BottomSheetPosition = .relative(BottomSheetPositioning.medium.rawValue)
     @State var showBottomSheet = true
+    
+    @AppStorage("locationsToShow") private var locationsToShow = ShowableLocations.all
     //@State var alwaysLocationTrackingEnabled = false
     
     var body: some View {
-        if locationProvider.authorizationStatus == .authorizedAlways {
-            AllLocationsView()
+        
+        TabView {
+            AllLocationsView(locationsToShow: $locationsToShow)
                 .environment(locationProvider)
                 .bottomSheet(bottomSheetPosition: self.$bottomSheetPosition, switchablePositions: [
-                    .relativeBottom(BottomSheetPositioning.small.rawValue),
+                    .relative(BottomSheetPositioning.small.rawValue),
                     .relative(BottomSheetPositioning.medium.rawValue),
-                    .relativeTop(BottomSheetPositioning.large.rawValue)
-                ], headerContent: {HeadlineView().environment(locationProvider).padding()}) {
+                    .relative(BottomSheetPositioning.large.rawValue)
+                ], headerContent: {headLineView}) {
                     //The list of the most popular songs of the artist.
-                    ScrollView {
-                        //SliderMinutesBack(percent: $intervallToShowOneToFourteen)
-                        //PickLocationView(typeOfLocation: $typeOfLocation)
-                        Text("Status: \(locationProvider.authorizationStatus)")
-                            .padding()
+                    VStack {
+                        Picker("Points to look at", selection: $locationsToShow) {
+                            ForEach(ShowableLocations.allCases, id: \.self) { locationType in
+                                Text(locationType.rawValue)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                        .padding()
+                        Text("Currently selected: \(locationsToShow.rawValue)")
                     }
+                    
+
                 }
                 .customAnimation(.snappy.speed(2))//(.easeIn.speed(3)) //.linear.speed(1.5))
                 .customBackground(.thickMaterial)
-        } else {
+                .tabItem {
+                    Image(systemName: "mappin.and.ellipse")
+                    Text("Recent locations")
+                }
             EnableLocationTrackingView()
+                .tabItem {
+                    Image(systemName: "gearshape")
+                    Text("Settings")
+                }
         }
-
+    }
+    
+    var headLineView: some View {
+        switch locationProvider.authorizationStatus {
+        case .authorizedAlways:
+            Text("Showing locations")
+                .font(.title)
+        case .authorizedWhenInUse:
+            Text("Need always access to locations")
+                .font(.title)
+        default:
+            Text("No access to location of user")
+                .font(.title)
+        }
     }
 }
 
 #Preview {
     MainView()
-}
-
-public enum BottomSheetPositioning: CGFloat, CaseIterable {
-    case small = 0.10//0.2246
-    case medium = 0.5
-    case large = 0.99
 }

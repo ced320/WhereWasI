@@ -70,6 +70,7 @@ struct PersistentLocationController {
         let movementEntity = MovementLocationEntity(context: self.container.viewContext)
         movementEntity.date = date
         movementEntity.movementLocation = locationData
+        movementEntity.summary = "Empty"
         saveData()
     }
     
@@ -79,6 +80,7 @@ struct PersistentLocationController {
         let visitEntity = VisitedLocationEntity(context: self.container.viewContext)
         visitEntity.date = date
         visitEntity.visitedLocation = visitData
+        visitEntity.summary = "Empty visit"
         saveData()
     }
     
@@ -107,15 +109,20 @@ struct PersistentLocationController {
                                                       cacheName: nil)
         try? frController.performFetch()
         var searchedLocations = [MapLocation]()
+        var lastAddedLocation: CLLocation? = nil
         if let locationData = frController.fetchedObjects {
             for locationDatum in locationData {
                 if let locationDate = locationDatum.date, let locationDescription = locationDatum.summary, let locationDatum = locationDatum.movementLocation, let tempLocation = try? NSKeyedUnarchiver.unarchivedObject(ofClass: CLLocation.self, from: locationDatum) {
                     let location = MapLocation(coordinate: tempLocation.coordinate, time: locationDate, locationType: .movement, hAccuracy: tempLocation.horizontalAccuracy, locationDescription: locationDescription)
-                    searchedLocations.append(location)
+                    if lastAddedLocation == nil || (lastAddedLocation != nil && lastAddedLocation!.timestamp != tempLocation.timestamp) {
+                        searchedLocations.append(location)
+                        lastAddedLocation = tempLocation
+                    }
                 }
             }
         }
-        return searchedLocations.filter{$0.hAccuracy < desiredAccuracyInMeter}
+        let result = searchedLocations.filter{$0.hAccuracy < desiredAccuracyInMeter}
+        return result
     }
     
     /// Gives back where the user visited sorted as CLVisit sorted by descending Date
