@@ -15,20 +15,18 @@ struct MapLocation: Identifiable {
     let locationType: LocationType
     let hAccuracy: CLLocationAccuracy
     let locationDescription: String
-    let visitInfo: CLVisit?
     
-    init(coordinate: CLLocationCoordinate2D, time: Date, locationType: LocationType, hAccuracy: CLLocationAccuracy, locationDescription: String, visitInfo: CLVisit? = nil) {
+    init(coordinate: CLLocationCoordinate2D, time: Date, locationType: LocationType, hAccuracy: CLLocationAccuracy, locationDescription: String) {
         self.coordinate = coordinate
         self.time = time
         self.locationType = locationType
         self.hAccuracy = hAccuracy
-        self.visitInfo = visitInfo
         self.locationDescription = locationDescription
     }
 }
 
 
 
-enum LocationType {
+public enum LocationType {
     case visit, movement
 }

@@ -8,7 +8,7 @@
 import CoreData
 import CoreLocation
 
-struct PersistentLocationController {
+class PersistentLocationController {
     static let shared = PersistentLocationController()
 
     let container: NSPersistentContainer
@@ -25,18 +25,33 @@ struct PersistentLocationController {
         })
     }
     
-    func getPastVisits(daysToGoBack days: Int, desiredAccuracyOfLocations: CLLocationAccuracy) -> [MapLocation] {
+    func getPastVisits(daysToGoBack days: Int, desiredAccuracyOfLocations: CLLocationAccuracy, customVisits: [MapLocation]? = nil) -> [MapLocation] {
+        if let customVisits = customVisits {
+            return customVisits
+        }
         return getVisitLocationBetweenDates(startDateLongerAgo: NSDate(timeIntervalSince1970: Date().timeIntervalSince1970 - Double(60*60*24*days)), endDateCloserToRightNow: NSDate(), desiredAccuracyInMeter: desiredAccuracyOfLocations)
     }
     
-    func getPastMovements(daysToGoBack days: Int, desiredAccuracyOfLocations: CLLocationAccuracy) -> [MapLocation] {
-        print(NSDate(timeIntervalSince1970: Date().timeIntervalSince1970 - Double(60*60*24*days)))
+    func getPastMovements(daysToGoBack days: Int, desiredAccuracyOfLocations: CLLocationAccuracy, customMovement: [MapLocation]? = nil) -> [MapLocation] {
+        if let customMovement = customMovement {
+            return customMovement
+        }
         return getMovementLocationBetweenDates(startDateLongerAgo: NSDate(timeIntervalSince1970: Date().timeIntervalSince1970 - Double(60*60*24*days)), endDateCloserToRightNow: NSDate(), desiredAccuracyInMeter: desiredAccuracyOfLocations)
     }
     
-    func getAllPastLocations(daysToGoBack days: Int, desiredAccuracyOfLocations: CLLocationAccuracy) -> [MapLocation] {
-        let visits = getPastVisits(daysToGoBack: days, desiredAccuracyOfLocations: desiredAccuracyOfLocations)
-        let movements = getPastMovements(daysToGoBack: days, desiredAccuracyOfLocations: desiredAccuracyOfLocations)
+    func getAllPastLocations(daysToGoBack days: Int, desiredAccuracyOfLocations: CLLocationAccuracy, customVisits: [MapLocation]? = nil, customMovement: [MapLocation]? = nil) -> [MapLocation] {
+        let movements: [MapLocation]
+        let visits: [MapLocation]
+        if let customVisits = customVisits {
+            visits = customVisits
+        } else {
+            visits = getPastVisits(daysToGoBack: days, desiredAccuracyOfLocations: desiredAccuracyOfLocations)
+        }
+        if let customMovement = customMovement {
+            movements = customMovement
+        } else {
+            movements = getPastMovements(daysToGoBack: days, desiredAccuracyOfLocations: desiredAccuracyOfLocations)
+        }
         var visitPointer = 0
         var movementPointer = 0
         var allSortedPoints = [MapLocation]()
@@ -52,7 +67,7 @@ struct PersistentLocationController {
                 break
             }
             //Case 3a Visit point is smaller than movement point
-            else if visits[visitPointer].time <= movements[movementPointer].time {
+            else if visits[visitPointer].time >= movements[movementPointer].time {
                 allSortedPoints.append(visits[visitPointer])
                 visitPointer += 1
             }
@@ -65,23 +80,23 @@ struct PersistentLocationController {
         return allSortedPoints
     }
     
-    func addMovementLocationEntity(movementLocation location: CLLocation) {
+    func addMovementLocationEntity(movementLocation location: CLLocation, description: String? = "Empty") {
         let locationData = try? NSKeyedArchiver.archivedData(withRootObject: location, requiringSecureCoding: true)
         let date = location.timestamp
         let movementEntity = MovementLocationEntity(context: self.container.viewContext)
         movementEntity.date = date
         movementEntity.movementLocation = locationData
-        movementEntity.summary = "Empty"
+        movementEntity.summary = description
         saveData()
     }
     
-    func addVisitLocationEntity(visitLocation location: CLVisit) {
+    func addVisitLocationEntity(visitLocation location: CLVisit, description: String? = "Empty visit") {
         let visitData = try? NSKeyedArchiver.archivedData(withRootObject: location, requiringSecureCoding: true)
         let date = location.arrivalDate
         let visitEntity = VisitedLocationEntity(context: self.container.viewContext)
         visitEntity.date = date
         visitEntity.visitedLocation = visitData
-        visitEntity.summary = "Empty visit"
+        visitEntity.summary = description
         saveData()
     }
     
@@ -98,7 +113,7 @@ struct PersistentLocationController {
     /// - Parameters:
     ///   - startDate: This date has to be further back in the past than the end Date
     ///   - endDate: This date has to be further to the present than the start date
-    /// - Returns: locations as CLLocation where user was sorted by descending date
+    /// - Returns: locations as CLLocation where user was sorted by descending date (newest date at position 0)
     private func getMovementLocationBetweenDates(startDateLongerAgo startDate: NSDate, endDateCloserToRightNow endDate: NSDate, desiredAccuracyInMeter: CLLocationAccuracy) -> [MapLocation] {
         let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", startDate, endDate)
         let fetchRequest = NSFetchRequest<MovementLocationEntity>(entityName: "MovementLocationEntity")
@@ -130,7 +145,7 @@ struct PersistentLocationController {
     /// - Parameters:
     ///   - startDate: This date has to be further back in the past than the end Date
     ///   - endDate: This date has to be further to the present than the start date
-    /// - Returns: visits as CLVisit sorted be descending date
+    /// - Returns: visits as CLVisit sorted be descending date (newest date at position 0)
     private func getVisitLocationBetweenDates(startDateLongerAgo startDate: NSDate, endDateCloserToRightNow endDate: NSDate, desiredAccuracyInMeter: CLLocationAccuracy) -> [MapLocation] {
         let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", startDate, endDate)
         let fetchRequest = NSFetchRequest<VisitedLocationEntity>(entityName: "VisitedLocationEntity")
@@ -145,7 +160,7 @@ struct PersistentLocationController {
         if let locationVisitData = frController.fetchedObjects {
             for locationDatum in locationVisitData {
                 if let locationDate = locationDatum.date, let locationDescription = locationDatum.summary, let locationDatum = locationDatum.visitedLocation, let tempLocation = try? NSKeyedUnarchiver.unarchivedObject(ofClass: CLVisit.self, from: locationDatum) {
-                    let location = MapLocation(coordinate: tempLocation.coordinate, time: locationDate, locationType: .visit, hAccuracy: tempLocation.horizontalAccuracy, locationDescription: locationDescription, visitInfo: tempLocation)
+                    let location = MapLocation(coordinate: tempLocation.coordinate, time: locationDate, locationType: .visit, hAccuracy: tempLocation.horizontalAccuracy, locationDescription: locationDescription)
                     if location.hAccuracy < desiredAccuracyInMeter {
                         searchedLocations.append(location)
                     }
@@ -155,3 +170,5 @@ struct PersistentLocationController {
         return searchedLocations
     }
 }
+
+

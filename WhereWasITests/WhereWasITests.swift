@@ -2,11 +2,10 @@
 //  WhereWasITests.swift
 //  WhereWasITests
 //
-//  Created by Cedric Frimmel-Hoffmann on 24.07.24.
+//  Created by Cedric Frimmel-Hoffmann on 07.08.24.
 //
 
 import XCTest
-@testable import WhereWasI
 
 final class WhereWasITests: XCTestCase {
 
@@ -28,7 +27,7 @@ final class WhereWasITests: XCTestCase {
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
-        self.measure {
+        measure {
             // Put the code you want to measure the time of here.
         }
     }

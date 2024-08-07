@@ -18,3 +18,7 @@ public enum BottomSheetPositioning: CGFloat, CaseIterable {
     case medium = 0.5
     case large = 0.99
 }
+
+public enum StorageType {
+    case persistent, inMemory
+}

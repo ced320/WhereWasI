@@ -12,7 +12,7 @@
 		901057BD2C516A3800AB6502 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 901057BC2C516A3800AB6502 /* Preview Assets.xcassets */; };
 		90138C4E2C51717F00FD0386 /* CurrentLocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90138C4D2C51717F00FD0386 /* CurrentLocationProvider.swift */; };
 		90138C502C517CE900FD0386 /* MapLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90138C4F2C517CE900FD0386 /* MapLocation.swift */; };
-		901C0AE12C5251E100811AA5 /* PersistenceLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AE02C5251E100811AA5 /* PersistenceLocations.swift */; };
+		901C0AE12C5251E100811AA5 /* PersistenceLocationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AE02C5251E100811AA5 /* PersistenceLocationsController.swift */; };
 		901C0AE42C52529C00811AA5 /* PastLocations.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AE22C52529C00811AA5 /* PastLocations.xcdatamodeld */; };
 		901C0AE72C527CA200811AA5 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 901C0AE62C527CA200811AA5 /* BottomSheet */; };
 		901C0AE92C527F6200811AA5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AE82C527F6200811AA5 /* MainView.swift */; };
@@ -20,7 +20,19 @@
 		901C0AEF2C5289A100811AA5 /* HeadlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AEE2C5289A100811AA5 /* HeadlineView.swift */; };
 		901C0AF12C528CD200811AA5 /* EnableLocationTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AF02C528CD200811AA5 /* EnableLocationTrackingView.swift */; };
 		9068F2432C53C17800084D4D /* ShowableLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9068F2422C53C17800084D4D /* ShowableLocations.swift */; };
+		90B402812C63646800122691 /* WhereWasITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B402802C63646800122691 /* WhereWasITests.swift */; };
+		90B402882C6365ED00122691 /* PersistenceLocationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B402872C6365ED00122691 /* PersistenceLocationsTest.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		90B402822C63646800122691 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 901057AA2C516A3500AB6502 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 901057B12C516A3500AB6502;
+			remoteInfo = WhereWasI;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		901057B22C516A3500AB6502 /* WhereWasI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhereWasI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,13 +43,16 @@
 		901057E32C516E9400AB6502 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		90138C4D2C51717F00FD0386 /* CurrentLocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationProvider.swift; sourceTree = "<group>"; };
 		90138C4F2C517CE900FD0386 /* MapLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocation.swift; sourceTree = "<group>"; };
-		901C0AE02C5251E100811AA5 /* PersistenceLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceLocations.swift; sourceTree = "<group>"; };
+		901C0AE02C5251E100811AA5 /* PersistenceLocationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceLocationsController.swift; sourceTree = "<group>"; };
 		901C0AE32C52529C00811AA5 /* PastLocations.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PastLocations.xcdatamodel; sourceTree = "<group>"; };
 		901C0AE82C527F6200811AA5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		901C0AEA2C5280DB00811AA5 /* AllLocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsView.swift; sourceTree = "<group>"; };
 		901C0AEE2C5289A100811AA5 /* HeadlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadlineView.swift; sourceTree = "<group>"; };
 		901C0AF02C528CD200811AA5 /* EnableLocationTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableLocationTrackingView.swift; sourceTree = "<group>"; };
 		9068F2422C53C17800084D4D /* ShowableLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowableLocations.swift; sourceTree = "<group>"; };
+		90B4027E2C63646800122691 /* WhereWasITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhereWasITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		90B402802C63646800122691 /* WhereWasITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereWasITests.swift; sourceTree = "<group>"; };
+		90B402872C6365ED00122691 /* PersistenceLocationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceLocationsTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +64,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		90B4027B2C63646800122691 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -56,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				901057B42C516A3500AB6502 /* WhereWasI */,
+				90B4027F2C63646800122691 /* WhereWasITests */,
 				901057B32C516A3500AB6502 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				901057B22C516A3500AB6502 /* WhereWasI.app */,
+				90B4027E2C63646800122691 /* WhereWasITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,7 +139,7 @@
 		901057E22C516CDD00AB6502 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				901C0AE02C5251E100811AA5 /* PersistenceLocations.swift */,
+				901C0AE02C5251E100811AA5 /* PersistenceLocationsController.swift */,
 				90138C4F2C517CE900FD0386 /* MapLocation.swift */,
 				901C0AE22C52529C00811AA5 /* PastLocations.xcdatamodeld */,
 			);
@@ -135,6 +159,15 @@
 				9068F2422C53C17800084D4D /* ShowableLocations.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		90B4027F2C63646800122691 /* WhereWasITests */ = {
+			isa = PBXGroup;
+			children = (
+				90B402802C63646800122691 /* WhereWasITests.swift */,
+				90B402872C6365ED00122691 /* PersistenceLocationsTest.swift */,
+			);
+			path = WhereWasITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,6 +193,24 @@
 			productReference = 901057B22C516A3500AB6502 /* WhereWasI.app */;
 			productType = "com.apple.product-type.application";
 		};
+		90B4027D2C63646800122691 /* WhereWasITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 90B402862C63646800122691 /* Build configuration list for PBXNativeTarget "WhereWasITests" */;
+			buildPhases = (
+				90B4027A2C63646800122691 /* Sources */,
+				90B4027B2C63646800122691 /* Frameworks */,
+				90B4027C2C63646800122691 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				90B402832C63646800122691 /* PBXTargetDependency */,
+			);
+			name = WhereWasITests;
+			productName = WhereWasITests;
+			productReference = 90B4027E2C63646800122691 /* WhereWasITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -172,6 +223,10 @@
 				TargetAttributes = {
 					901057B12C516A3500AB6502 = {
 						CreatedOnToolsVersion = 15.4;
+					};
+					90B4027D2C63646800122691 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 901057B12C516A3500AB6502;
 					};
 				};
 			};
@@ -192,6 +247,7 @@
 			projectRoot = "";
 			targets = (
 				901057B12C516A3500AB6502 /* WhereWasI */,
+				90B4027D2C63646800122691 /* WhereWasITests */,
 			);
 		};
 /* End PBXProject section */
@@ -203,6 +259,13 @@
 			files = (
 				901057BD2C516A3800AB6502 /* Preview Assets.xcassets in Resources */,
 				901057BA2C516A3800AB6502 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90B4027C2C63646800122691 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,7 +281,7 @@
 				9068F2432C53C17800084D4D /* ShowableLocations.swift in Sources */,
 				901C0AF12C528CD200811AA5 /* EnableLocationTrackingView.swift in Sources */,
 				90138C4E2C51717F00FD0386 /* CurrentLocationProvider.swift in Sources */,
-				901C0AE12C5251E100811AA5 /* PersistenceLocations.swift in Sources */,
+				901C0AE12C5251E100811AA5 /* PersistenceLocationsController.swift in Sources */,
 				90138C502C517CE900FD0386 /* MapLocation.swift in Sources */,
 				901C0AE42C52529C00811AA5 /* PastLocations.xcdatamodeld in Sources */,
 				901057B62C516A3500AB6502 /* WhereWasIApp.swift in Sources */,
@@ -226,7 +289,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		90B4027A2C63646800122691 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90B402882C6365ED00122691 /* PersistenceLocationsTest.swift in Sources */,
+				90B402812C63646800122691 /* WhereWasITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		90B402832C63646800122691 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 901057B12C516A3500AB6502 /* WhereWasI */;
+			targetProxy = 90B402822C63646800122691 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		901057D52C516A3900AB6502 /* Debug */ = {
@@ -415,6 +495,47 @@
 			};
 			name = Release;
 		};
+		90B402842C63646800122691 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 285F7C475A;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "frimmel-hoffmann.cedric.WhereWasITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WhereWasI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WhereWasI";
+			};
+			name = Debug;
+		};
+		90B402852C63646800122691 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 285F7C475A;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "frimmel-hoffmann.cedric.WhereWasITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WhereWasI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WhereWasI";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -432,6 +553,15 @@
 			buildConfigurations = (
 				901057D82C516A3900AB6502 /* Debug */,
 				901057D92C516A3900AB6502 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		90B402862C63646800122691 /* Build configuration list for PBXNativeTarget "WhereWasITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90B402842C63646800122691 /* Debug */,
+				90B402852C63646800122691 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
