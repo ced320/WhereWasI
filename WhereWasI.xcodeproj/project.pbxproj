@@ -22,6 +22,11 @@
 		9068F2432C53C17800084D4D /* ShowableLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9068F2422C53C17800084D4D /* ShowableLocations.swift */; };
 		90B402812C63646800122691 /* WhereWasITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B402802C63646800122691 /* WhereWasITests.swift */; };
 		90B402882C6365ED00122691 /* PersistenceLocationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B402872C6365ED00122691 /* PersistenceLocationsTest.swift */; };
+		90B4028A2C64BD9B00122691 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B402892C64BD9B00122691 /* Achievement.swift */; };
+		90B4028D2C64BE1200122691 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B4028C2C64BE1200122691 /* Country.swift */; };
+		90B4028F2C64BF6300122691 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B4028E2C64BF6300122691 /* AchievementsView.swift */; };
+		90B402912C64BF9D00122691 /* AchievementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B402902C64BF9D00122691 /* AchievementController.swift */; };
+		90B402942C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 90B402922C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +58,11 @@
 		90B4027E2C63646800122691 /* WhereWasITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhereWasITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		90B402802C63646800122691 /* WhereWasITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereWasITests.swift; sourceTree = "<group>"; };
 		90B402872C6365ED00122691 /* PersistenceLocationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceLocationsTest.swift; sourceTree = "<group>"; };
+		90B402892C64BD9B00122691 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
+		90B4028C2C64BE1200122691 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		90B4028E2C64BF6300122691 /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
+		90B402902C64BF9D00122691 /* AchievementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementController.swift; sourceTree = "<group>"; };
+		90B402932C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PersistentAchievementsInfo.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +134,7 @@
 				901C0AEA2C5280DB00811AA5 /* AllLocationsView.swift */,
 				901C0AEE2C5289A100811AA5 /* HeadlineView.swift */,
 				901C0AF02C528CD200811AA5 /* EnableLocationTrackingView.swift */,
+				90B4028E2C64BF6300122691 /* AchievementsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -131,7 +142,9 @@
 		901057E12C516CD500AB6502 /* MVC */ = {
 			isa = PBXGroup;
 			children = (
+				901C0AE02C5251E100811AA5 /* PersistenceLocationsController.swift */,
 				90138C4D2C51717F00FD0386 /* CurrentLocationProvider.swift */,
+				90B402902C64BF9D00122691 /* AchievementController.swift */,
 			);
 			path = MVC;
 			sourceTree = "<group>";
@@ -139,9 +152,9 @@
 		901057E22C516CDD00AB6502 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				901C0AE02C5251E100811AA5 /* PersistenceLocationsController.swift */,
 				90138C4F2C517CE900FD0386 /* MapLocation.swift */,
 				901C0AE22C52529C00811AA5 /* PastLocations.xcdatamodeld */,
+				90B4028B2C64BDF600122691 /* Achievement */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -168,6 +181,16 @@
 				90B402872C6365ED00122691 /* PersistenceLocationsTest.swift */,
 			);
 			path = WhereWasITests;
+			sourceTree = "<group>";
+		};
+		90B4028B2C64BDF600122691 /* Achievement */ = {
+			isa = PBXGroup;
+			children = (
+				90B402892C64BD9B00122691 /* Achievement.swift */,
+				90B4028C2C64BE1200122691 /* Country.swift */,
+				90B402922C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodeld */,
+			);
+			path = Achievement;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,12 +303,17 @@
 				901C0AE92C527F6200811AA5 /* MainView.swift in Sources */,
 				9068F2432C53C17800084D4D /* ShowableLocations.swift in Sources */,
 				901C0AF12C528CD200811AA5 /* EnableLocationTrackingView.swift in Sources */,
+				90B4028D2C64BE1200122691 /* Country.swift in Sources */,
 				90138C4E2C51717F00FD0386 /* CurrentLocationProvider.swift in Sources */,
 				901C0AE12C5251E100811AA5 /* PersistenceLocationsController.swift in Sources */,
+				90B402912C64BF9D00122691 /* AchievementController.swift in Sources */,
 				90138C502C517CE900FD0386 /* MapLocation.swift in Sources */,
 				901C0AE42C52529C00811AA5 /* PastLocations.xcdatamodeld in Sources */,
+				90B4028F2C64BF6300122691 /* AchievementsView.swift in Sources */,
 				901057B62C516A3500AB6502 /* WhereWasIApp.swift in Sources */,
+				90B4028A2C64BD9B00122691 /* Achievement.swift in Sources */,
 				901C0AEF2C5289A100811AA5 /* HeadlineView.swift in Sources */,
+				90B402942C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,7 +472,9 @@
 				INFOPLIST_FILE = WhereWasI/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This enables the app to show your current location";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need to view your location in the background to mark the places where you have been";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need to view your location in the background to mark the places where you have been";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need to view your location to show where you are located";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -478,7 +508,9 @@
 				INFOPLIST_FILE = WhereWasI/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This enables the app to show your current location";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need to view your location in the background to mark the places where you have been";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need to view your location in the background to mark the places where you have been";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need to view your location to show where you are located";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -596,6 +628,17 @@
 			currentVersion = 901C0AE32C52529C00811AA5 /* PastLocations.xcdatamodel */;
 			name = PastLocations.xcdatamodeld;
 			path = "/Users/cedricfrimmel-hoffmann/Developer/WhereWasI/WhereWasI/Model/PastLocations.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		90B402922C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				90B402932C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodel */,
+			);
+			currentVersion = 90B402932C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodel */;
+			name = PersistentAchievementsInfo.xcdatamodeld;
+			path = "/Users/cedricfrimmel-hoffmann/Developer/WhereWasI/WhereWasI/Model/Achievement/PersistentAchievementsInfo.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -36,10 +36,34 @@ struct EnableLocationTrackingView: View {
             default:
                 Text("No access to location of user")
             }
+            VStack {
+                Button("Make push notification") {
+                    makePushNotification(title: "Test", information: "successful")
+                }
+                Button("Push Notifications") {
+                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                        if success {
+                            print("Permission approved!")
+                        } else if let error = error {
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
+            }
         }.padding()
-        
-        
-
+    }
+    
+    private func makePushNotification(title: String, information: String) {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.subtitle = information
+        content.sound = UNNotificationSound.default
+        // show this notification five seconds from now
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        // choose a random identifier
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        // add our notification request
+        UNUserNotificationCenter.current().add(request)
     }
 }
 

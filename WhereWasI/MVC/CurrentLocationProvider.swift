@@ -31,6 +31,19 @@ import CoreLocation
     
     func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
         PersistentLocationController.shared.addVisitLocationEntity(visitLocation: visit)
+        let visitLocationCoordinate = CLLocation(latitude: visit.coordinate.latitude, longitude: visit.coordinate.longitude)
+        visitLocationCoordinate.placemark { placemark, error in
+            guard let placemark = placemark else {
+                self.makePushNotification(title: "Error countryCode", information: "\(error?.localizedDescription ?? "No error description")")
+                return
+            }
+            if let countryCode = placemark.isoCountryCode {
+                PersistentLocationController.shared.addCountryCode(isoCountryCode: countryCode)
+                self.makePushNotification(title: "Success countryCode", information: "Could add countryCode: \(countryCode)")
+            } else {
+                self.makePushNotification(title: "Error countryCode", information: "\(error?.localizedDescription ?? "No error description")")
+            }
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -61,6 +74,19 @@ import CoreLocation
     
     func getAllLocationsStored(daysToGoBack days: Int, desiredAccuracyInMeter: CLLocationAccuracy) -> [MapLocation] {
         PersistentLocationController.shared.getAllPastLocations(daysToGoBack: days, desiredAccuracyOfLocations: desiredAccuracyInMeter)
+    }
+    
+    private func makePushNotification(title: String, information: String) {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.subtitle = information
+        content.sound = UNNotificationSound.default
+        // show this notification five seconds from now
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        // choose a random identifier
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        // add our notification request
+        UNUserNotificationCenter.current().add(request)
     }
     
 }

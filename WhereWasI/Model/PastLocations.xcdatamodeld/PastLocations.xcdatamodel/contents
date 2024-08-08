@@ -5,6 +5,9 @@
         <attribute name="movementLocation" optional="YES" attributeType="Binary"/>
         <attribute name="summary" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="VisitedCountryEntity" representedClassName="VisitedCountryEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="iso2CountryCode" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="VisitedLocationEntity" representedClassName="VisitedLocationEntity" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="summary" optional="YES" attributeType="String"/>

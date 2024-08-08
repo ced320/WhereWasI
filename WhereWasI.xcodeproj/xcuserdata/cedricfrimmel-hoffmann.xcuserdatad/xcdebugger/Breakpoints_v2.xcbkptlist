@@ -30,8 +30,8 @@
             filePath = "WhereWasI/MVC/CurrentLocationProvider.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "getAllLocationsStored(daysToGoBack:desiredAccuracyInMeter:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -292,9 +292,25 @@
             filePath = "WhereWasI/Model/PersistenceLocationsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
             landmarkName = "getMovementLocationBetweenDates(startDateLongerAgo:endDateCloserToRightNow:desiredAccuracyInMeter:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EA9DEBAA-63A9-4BBA-A23B-4A03EC56BBC1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WhereWasI/MVC/PersistenceLocationsController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "addCountryCode(isoCountryCode:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

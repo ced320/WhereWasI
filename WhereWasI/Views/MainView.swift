@@ -50,6 +50,12 @@ struct MainView: View {
                     Image(systemName: "mappin.and.ellipse")
                     Text("Recent locations")
                 }
+            AchievementsView(visitedCountries: PersistentLocationController.shared.retrieveAllVisitedCountries())
+                .environment(locationProvider)
+                .tabItem {
+                    Image(systemName: "star")
+                    Text("Achievements")
+                }
             EnableLocationTrackingView()
                 .tabItem {
                     Image(systemName: "gearshape")

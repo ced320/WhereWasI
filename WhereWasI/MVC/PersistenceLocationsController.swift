@@ -100,6 +100,60 @@ class PersistentLocationController {
         saveData()
     }
     
+    func addCountryCode(isoCountryCode countryCode: String) {
+        if countryCode.count != 2 {
+            return
+        }
+        let alreadyVisitedCountries = retrieveAllVisitedCountries2IsoCodes()
+        if !alreadyVisitedCountries.contains(countryCode) {
+            let visitedCountryEntity = VisitedCountryEntity(context: self.container.viewContext)
+            visitedCountryEntity.iso2CountryCode = countryCode
+            saveData()
+        }
+    }
+    
+    private func retrieveAllVisitedCountries2IsoCodes() -> Set<String> {
+        let fetchRequest = NSFetchRequest<VisitedCountryEntity>(entityName: "VisitedCountryEntity")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "iso2CountryCode", ascending: false)]
+        let frController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                      managedObjectContext: self.container.viewContext,
+                                                      sectionNameKeyPath: nil,
+                                                      cacheName: nil)
+        try? frController.performFetch()
+        var result = Set<String>()
+        if let fetchedCodes = frController.fetchedObjects {
+            let countryCodesWithNil = fetchedCodes.map {$0.iso2CountryCode}
+            for countryCode in countryCodesWithNil {
+                if let countryCode = countryCode {
+                    result.insert(countryCode)
+                }
+            }
+            return result
+        }
+        return result
+    }
+    
+    func retrieveAllVisitedCountries() -> [Country] {
+        let fetchRequest = NSFetchRequest<VisitedCountryEntity>(entityName: "VisitedCountryEntity")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "iso2CountryCode", ascending: false)]
+        let frController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                      managedObjectContext: self.container.viewContext,
+                                                      sectionNameKeyPath: nil,
+                                                      cacheName: nil)
+        try? frController.performFetch()
+        var result = [Country]()
+        if let fetchedCodes = frController.fetchedObjects {
+            let countryCodesWithNil = fetchedCodes.map {$0.iso2CountryCode}
+            for countryCode in countryCodesWithNil {
+                if let countryCode = countryCode {
+                    result.append(Country(iso2CountryCode: countryCode))
+                }
+            }
+            return result
+        }
+        return result
+    }
+    
     private func saveData() {
         do {
             try container.viewContext.save()// managedObjectContext.save()
@@ -162,13 +216,28 @@ class PersistentLocationController {
                 if let locationDate = locationDatum.date, let locationDescription = locationDatum.summary, let locationDatum = locationDatum.visitedLocation, let tempLocation = try? NSKeyedUnarchiver.unarchivedObject(ofClass: CLVisit.self, from: locationDatum) {
                     let location = MapLocation(coordinate: tempLocation.coordinate, time: locationDate, locationType: .visit, hAccuracy: tempLocation.horizontalAccuracy, locationDescription: locationDescription)
                     if location.hAccuracy < desiredAccuracyInMeter {
-                        searchedLocations.append(location)
+                        if let lastLocationAdded = searchedLocations.last {
+                            if (lastLocationAdded.time.timeIntervalSince1970 - location.time.timeIntervalSince1970) < 0.1 {
+                                if lastLocationAdded.hAccuracy > location.hAccuracy {
+                                    //In case the current location has a better accuracy than the last one
+                                    searchedLocations.removeLast()
+                                    searchedLocations.append(location)
+                                }
+                            } else {
+                                searchedLocations.append(location)
+                            }
+                        } else {
+                            searchedLocations.append(location)
+                        }
+                        
                     }
                 }
             }
         }
         return searchedLocations
     }
+    
+    
 }
 
 

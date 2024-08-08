@@ -7,17 +7,12 @@
 		<string>fetch</string>
 		<string>location</string>
 		<string>processing</string>
+		<string>remote-notification</string>
 	</array>
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIImageName</key>
 		<string></string>
 	</dict>
-    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>We need to view your location in the background to mark the places where you have been</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>We need to view your location to show where you are located</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>We need to view your location in the background to mark the places where you have been</string>
 </dict>
 </plist>
