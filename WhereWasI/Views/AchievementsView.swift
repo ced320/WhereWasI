@@ -17,11 +17,12 @@ struct AchievementsView: View {
     let persistenceController = PersistentLocationController.shared
     
     var body: some View {
-        Text("Already visited countries")
-            .font(.title)
-        List(visitedCountries) {
-            Text("\($0.flag) \($0.countryName)")
-            
+        VStack {
+            Text("Already visited countries")
+                .font(.title)
+            List(visitedCountries) {
+                Text("\($0.flag) \($0.countryName)")
+            }
         }
     }
     
