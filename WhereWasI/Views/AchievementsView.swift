@@ -12,17 +12,21 @@ import CoreLocation
 struct AchievementsView: View {
     
     @State var testLocation1 = CLLocation(latitude: 52.1665716019436, longitude: 11.65793975891662)
-    @State var achievementController = AchievementController()
-    @State var visitedCountries: [Country]
+    @State var countriesVisited = PersistentLocationController.shared.retrieveAllVisitedCountries()
     let persistenceController = PersistentLocationController.shared
+    @Binding var lastUpdatedCountryList: Double
     
     var body: some View {
         VStack {
             Text("Already visited countries")
                 .font(.title)
-            List(visitedCountries) {
+            List(countriesVisited) {
                 Text("\($0.flag) \($0.countryName)")
             }
+        }
+        .onChange(of: lastUpdatedCountryList) {
+            countriesVisited = PersistentLocationController.shared.retrieveAllVisitedCountries()
+            print("change Timer")
         }
     }
     
@@ -31,10 +35,10 @@ struct AchievementsView: View {
 
 }
 
-#Preview {
-    AchievementsView(visitedCountries: [Country(iso2CountryCode: "DE"),
-                                        Country(iso2CountryCode: "PE"),
-                                        Country(iso2CountryCode: "PA"),
-                                        Country(iso2CountryCode: "LC"),
-                                        Country(iso2CountryCode: "MF"),])
-}
+//#Preview {
+//    AchievementsView(visitedCountries: [Country(iso2CountryCode: "DE"),
+//                                        Country(iso2CountryCode: "PE"),
+//                                        Country(iso2CountryCode: "PA"),
+//                                        Country(iso2CountryCode: "LC"),
+//                                        Country(iso2CountryCode: "MF"),])
+//}

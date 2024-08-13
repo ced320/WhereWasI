@@ -27,6 +27,7 @@
 		90B4028F2C64BF6300122691 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B4028E2C64BF6300122691 /* AchievementsView.swift */; };
 		90B402912C64BF9D00122691 /* AchievementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B402902C64BF9D00122691 /* AchievementController.swift */; };
 		90B402942C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 90B402922C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodeld */; };
+		90E90D2B2C6B5F9B005C31E5 /* PersistentCountriesAddedInBackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E90D2A2C6B5F9B005C31E5 /* PersistentCountriesAddedInBackgroundController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		90B4028E2C64BF6300122691 /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
 		90B402902C64BF9D00122691 /* AchievementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementController.swift; sourceTree = "<group>"; };
 		90B402932C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PersistentAchievementsInfo.xcdatamodel; sourceTree = "<group>"; };
+		90E90D2A2C6B5F9B005C31E5 /* PersistentCountriesAddedInBackgroundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentCountriesAddedInBackgroundController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				901C0AE02C5251E100811AA5 /* PersistenceLocationsController.swift */,
 				90138C4D2C51717F00FD0386 /* CurrentLocationProvider.swift */,
 				90B402902C64BF9D00122691 /* AchievementController.swift */,
+				90E90D2A2C6B5F9B005C31E5 /* PersistentCountriesAddedInBackgroundController.swift */,
 			);
 			path = MVC;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				901C0AE12C5251E100811AA5 /* PersistenceLocationsController.swift in Sources */,
 				90B402912C64BF9D00122691 /* AchievementController.swift in Sources */,
 				90138C502C517CE900FD0386 /* MapLocation.swift in Sources */,
+				90E90D2B2C6B5F9B005C31E5 /* PersistentCountriesAddedInBackgroundController.swift in Sources */,
 				901C0AE42C52529C00811AA5 /* PastLocations.xcdatamodeld in Sources */,
 				90B4028F2C64BF6300122691 /* AchievementsView.swift in Sources */,
 				901057B62C516A3500AB6502 /* WhereWasIApp.swift in Sources */,

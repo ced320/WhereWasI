@@ -7,12 +7,14 @@
 
 import CoreData
 import CoreLocation
+import OSLog
 
 class PersistentLocationController {
     static let shared = PersistentLocationController()
-
+    
     let container: NSPersistentContainer
-
+    let logger = Logger()
+    
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "PastLocations")
         if inMemory {
@@ -87,6 +89,7 @@ class PersistentLocationController {
         movementEntity.date = date
         movementEntity.movementLocation = locationData
         movementEntity.summary = description
+        addCheckLocationEntityWithoutSaving(checkLocationToAdd: location)
         saveData()
     }
     
@@ -100,6 +103,27 @@ class PersistentLocationController {
         saveData()
     }
     
+    private func addCheckLocationEntityWithoutSaving(checkLocationToAdd location: CLLocation, description: String? = "Empty") {
+        let locationData = try? NSKeyedArchiver.archivedData(withRootObject: location, requiringSecureCoding: true)
+        let checkEntity = CheckLocationEntity(context: self.container.viewContext)//MovementLocationEntity(context: self.container.viewContext)
+        checkEntity.date = location.timestamp
+        checkEntity.locationToCheck = locationData
+    }
+    
+    func deleteCheckEntities(checkEntities entities: [CheckLocationEntity]) {
+        let context = self.container.viewContext
+        // Delete the objects from the context
+        for entity in entities {
+            context.delete(entity)
+        }
+        // Save the context to persist changes
+        do {
+            try context.save()
+        } catch {
+            logger.error("Failed to delete object: \(error)")
+        }
+    }
+    
     func addCountryCode(isoCountryCode countryCode: String) {
         if countryCode.count != 2 {
             return
@@ -109,6 +133,20 @@ class PersistentLocationController {
             let visitedCountryEntity = VisitedCountryEntity(context: self.container.viewContext)
             visitedCountryEntity.iso2CountryCode = countryCode
             saveData()
+        }
+    }
+    
+    func fetchAllEntriesToCheck() -> [CheckLocationEntity]? {
+        // Create a fetch request for the specified entity
+        let context = self.container.viewContext
+        let fetchRequest = NSFetchRequest<CheckLocationEntity>(entityName: "CheckLocationEntity")
+        do {
+            // Execute the fetch request and return the results
+            let results = try context.fetch(fetchRequest)
+            return results
+        } catch {
+            logger.error("Failed to fetch entries: \(error)")
+            return nil
         }
     }
     
@@ -235,6 +273,20 @@ class PersistentLocationController {
             }
         }
         return searchedLocations
+    }
+    
+    /// Gives back the most recent movementLocation
+    /// - Returns: the most recent movementLocation
+    func getNewestMovementLocation() -> MovementLocationEntity? {
+        let fetchRequest = NSFetchRequest<MovementLocationEntity>(entityName: "MovementLocationEntity")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        fetchRequest.fetchLimit = 1
+        let frController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                      managedObjectContext: self.container.viewContext,
+                                                      sectionNameKeyPath: nil,
+                                                      cacheName: nil)
+        try? frController.performFetch()
+        return frController.fetchedObjects?.first
     }
     
     

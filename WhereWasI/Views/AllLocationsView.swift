@@ -25,8 +25,9 @@ struct AllLocationsView: View {
                     Marker(location.time.description, coordinate: location.coordinate)
                 }
                 MapPolyline(coordinates: (locations).map{$0.coordinate})
-                    .mapOverlayLevel(level: .aboveLabels)
-                    .stroke(Gradient(colors: [.black,.blue]), lineWidth: 4)
+                    .mapOverlayLevel(level: .aboveRoads)
+                    .stroke(.black, lineWidth: 3)
+                    //.stroke(Gradient(colors: [.blue,.black]), lineWidth: 4)
             }
             .onAppear() {
                 calculateLocationsToShow()

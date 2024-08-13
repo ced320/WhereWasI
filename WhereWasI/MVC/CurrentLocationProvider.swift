@@ -26,24 +26,23 @@ import CoreLocation
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        PersistentLocationController.shared.addMovementLocationEntity(movementLocation: location)
+        if let lastAddedLocationDate = PersistentLocationController.shared.getNewestMovementLocation()?.date {
+            if lastAddedLocationDate != location.timestamp {
+                PersistentLocationController.shared.addMovementLocationEntity(movementLocation: location)
+            } else {
+                return
+            }
+        } else {
+            PersistentLocationController.shared.addMovementLocationEntity(movementLocation: location)
+        }
+        
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
+        self.makePushNotification(title: "Added visit", information: "")
         PersistentLocationController.shared.addVisitLocationEntity(visitLocation: visit)
-        let visitLocationCoordinate = CLLocation(latitude: visit.coordinate.latitude, longitude: visit.coordinate.longitude)
-        visitLocationCoordinate.placemark { placemark, error in
-            guard let placemark = placemark else {
-                self.makePushNotification(title: "Error countryCode", information: "\(error?.localizedDescription ?? "No error description")")
-                return
-            }
-            if let countryCode = placemark.isoCountryCode {
-                PersistentLocationController.shared.addCountryCode(isoCountryCode: countryCode)
-                self.makePushNotification(title: "Success countryCode", information: "Could add countryCode: \(countryCode)")
-            } else {
-                self.makePushNotification(title: "Error countryCode", information: "\(error?.localizedDescription ?? "No error description")")
-            }
-        }
+
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

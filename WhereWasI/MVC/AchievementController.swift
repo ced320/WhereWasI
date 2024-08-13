@@ -11,6 +11,7 @@ import Contacts
 
 @Observable class AchievementController {
     
+    //@AppStorage var lastUpdateDatum
     
 }
 
