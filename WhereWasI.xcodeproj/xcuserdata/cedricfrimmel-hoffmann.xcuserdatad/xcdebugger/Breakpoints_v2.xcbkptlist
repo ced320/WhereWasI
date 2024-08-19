@@ -30,8 +30,8 @@
             filePath = "WhereWasI/MVC/CurrentLocationProvider.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "getAllLocationsStored(daysToGoBack:desiredAccuracyInMeter:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -292,8 +292,8 @@
             filePath = "WhereWasI/MVC/PersistenceLocationsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "addCountryCode(isoCountryCode:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -308,8 +308,8 @@
             filePath = "WhereWasI/MVC/PersistenceLocationsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "269"
+            endingLineNumber = "269"
             landmarkName = "getMovementLocationBetweenDates(startDateLongerAgo:endDateCloserToRightNow:desiredAccuracyInMeter:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -324,8 +324,8 @@
             filePath = "WhereWasI/MVC/PersistenceLocationsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
             landmarkName = "getVisitLocationBetweenDates(startDateLongerAgo:endDateCloserToRightNow:desiredAccuracyInMeter:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -340,8 +340,8 @@
             filePath = "WhereWasI/MVC/PersistenceLocationsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
             landmarkName = "getVisitLocationBetweenDates(startDateLongerAgo:endDateCloserToRightNow:desiredAccuracyInMeter:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -356,8 +356,8 @@
             filePath = "WhereWasI/MVC/PersistenceLocationsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
             landmarkName = "getVisitLocationBetweenDates(startDateLongerAgo:endDateCloserToRightNow:desiredAccuracyInMeter:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -404,8 +404,8 @@
             filePath = "WhereWasI/MVC/PersistenceLocationsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
             landmarkName = "retrieveAllVisitedCountries()"
             landmarkType = "7">
          </BreakpointContent>
@@ -452,8 +452,8 @@
             filePath = "WhereWasI/MVC/PersistenceLocationsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "retrieveAllVisitedCountries2IsoCodes()"
             landmarkType = "7">
          </BreakpointContent>
@@ -468,8 +468,8 @@
             filePath = "WhereWasI/MVC/PersistenceLocationsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
             landmarkName = "retrieveAllVisitedCountries()"
             landmarkType = "7">
          </BreakpointContent>
@@ -500,8 +500,8 @@
             filePath = "WhereWasI/MVC/PersistenceLocationsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
             landmarkName = "retrieveAllVisitedCountries()"
             landmarkType = "7">
          </BreakpointContent>
@@ -516,8 +516,8 @@
             filePath = "WhereWasI/MVC/PersistenceLocationsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "retrieveAllVisitedCountries()"
             landmarkType = "7">
          </BreakpointContent>
@@ -532,8 +532,8 @@
             filePath = "WhereWasI/MVC/PersistenceLocationsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "addCountryCode(isoCountryCode:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -564,8 +564,8 @@
             filePath = "WhereWasI/MVC/PersistenceLocationsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "getAllPastLocations(daysToGoBack:desiredAccuracyOfLocations:customVisits:customMovement:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -580,8 +580,8 @@
             filePath = "WhereWasI/MVC/PersistenceLocationsController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
             landmarkName = "getMovementLocationBetweenDates(startDateLongerAgo:endDateCloserToRightNow:desiredAccuracyInMeter:)"
             landmarkType = "7">
          </BreakpointContent>

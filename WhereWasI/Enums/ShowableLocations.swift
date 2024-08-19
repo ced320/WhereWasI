@@ -22,3 +22,9 @@ public enum BottomSheetPositioning: CGFloat, CaseIterable {
 public enum StorageType {
     case persistent, inMemory
 }
+
+public enum PersistenceControllerType {
+    case normal
+    case preview
+    case testing
+}

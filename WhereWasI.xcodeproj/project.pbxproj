@@ -30,7 +30,6 @@
 		90B4028D2C64BE1200122691 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B4028C2C64BE1200122691 /* Country.swift */; };
 		90B4028F2C64BF6300122691 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B4028E2C64BF6300122691 /* AchievementsView.swift */; };
 		90B402912C64BF9D00122691 /* AchievementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B402902C64BF9D00122691 /* AchievementController.swift */; };
-		90B402942C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 90B402922C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +69,6 @@
 		90B4028C2C64BE1200122691 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		90B4028E2C64BF6300122691 /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
 		90B402902C64BF9D00122691 /* AchievementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementController.swift; sourceTree = "<group>"; };
-		90B402932C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PersistentAchievementsInfo.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,7 +206,6 @@
 			children = (
 				90B402892C64BD9B00122691 /* Achievement.swift */,
 				90B4028C2C64BE1200122691 /* Country.swift */,
-				90B402922C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodeld */,
 			);
 			path = Achievement;
 			sourceTree = "<group>";
@@ -336,7 +333,6 @@
 				901057B62C516A3500AB6502 /* WhereWasIApp.swift in Sources */,
 				90B4028A2C64BD9B00122691 /* Achievement.swift in Sources */,
 				901C0AEF2C5289A100811AA5 /* HeadlineView.swift in Sources */,
-				90B402942C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodeld in Sources */,
 				9045F8D42C734D6200235860 /* RequestAuthorizationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -652,17 +648,6 @@
 			currentVersion = 901C0AE32C52529C00811AA5 /* PastLocations.xcdatamodel */;
 			name = PastLocations.xcdatamodeld;
 			path = "/Users/cedricfrimmel-hoffmann/Developer/WhereWasI/WhereWasI/Model/PastLocations.xcdatamodeld";
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		90B402922C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				90B402932C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodel */,
-			);
-			currentVersion = 90B402932C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodel */;
-			name = PersistentAchievementsInfo.xcdatamodeld;
-			path = "/Users/cedricfrimmel-hoffmann/Developer/WhereWasI/WhereWasI/Model/Achievement/PersistentAchievementsInfo.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

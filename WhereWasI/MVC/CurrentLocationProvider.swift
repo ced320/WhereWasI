@@ -26,6 +26,7 @@ import CoreLocation
     @MainActor func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         PersistentLocationController.shared.addMovementLocationEntity(movementLocation: location)
+        PersistentLocationController.shared.addCheckLocationEntity(checkLocationToAdd: location)
     }
     
     @MainActor func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {

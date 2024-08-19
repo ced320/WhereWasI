@@ -11,23 +11,61 @@ import OSLog
 import UserNotifications
 
 @MainActor
-class PersistentLocationController {
-    static let shared = PersistentLocationController()
+class PersistentLocationController: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
     
-    let container: NSPersistentContainer
-    let logger = Logger()
+    static let shared = PersistentLocationController(type: .normal)
+    static let preview = PersistentLocationController(type: .preview)
+    static let testing = PersistentLocationController(type: .testing)
     
-    init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "PastLocations")
-        if inMemory {
-            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+    @Published var savedVisitedLocations: [VisitLocationEntity] = []
+    @Published var savedMovementLocations: [MovementLocationEntity] = []
+    
+    fileprivate var managedObjectContext: NSManagedObjectContext
+    private let fetchRequestVisitEntityController: NSFetchedResultsController<VisitLocationEntity>
+    private let fetchRequestMovementEntityController: NSFetchedResultsController<MovementLocationEntity>
+    private let logger = Logger()
+
+    
+    private init(type: PersistenceControllerType) {
+        switch type {
+        case .normal:
+            let persistentStore = PersistentStoreData()
+            self.managedObjectContext = persistentStore.context
+        case .preview:
+            let persistentStore = PersistentStoreData(inMemory: true)
+            self.managedObjectContext = persistentStore.context
+            // Add Mock Data
+            try? self.managedObjectContext.save()
+        case .testing:
+            let persistentStore = PersistentStoreData(inMemory: true)
+            self.managedObjectContext = persistentStore.context
         }
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
+        //setup fetchRequestControllers
+        //1.) For visitedLocations
+        let frVisits = NSFetchRequest<VisitLocationEntity>(entityName: "VisitLocationEntity")
+        frVisits.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        fetchRequestVisitEntityController = NSFetchedResultsController(fetchRequest: frVisits,
+                                                                       managedObjectContext: managedObjectContext,
+                                                                       sectionNameKeyPath: nil,
+                                                                       cacheName: nil)
+        //2.) For MovementLocation
+        let frMovements = NSFetchRequest<MovementLocationEntity>(entityName: "MovementLocationEntity")
+        frMovements.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        fetchRequestMovementEntityController = NSFetchedResultsController(fetchRequest: frMovements,
+                                                                          managedObjectContext: managedObjectContext,
+                                                                          sectionNameKeyPath: nil,
+                                                                          cacheName: nil)
+        super.init()
+        fetchRequestVisitEntityController.delegate = self
+        fetchRequestMovementEntityController.delegate = self
+        
     }
+
+    
+    
+    
+    
+    //----------
     
     func getPastVisits(daysToGoBack days: Int, desiredAccuracyOfLocations: CLLocationAccuracy, customVisits: [MapLocation]? = nil) -> [MapLocation] {
         if let customVisits = customVisits {
@@ -84,44 +122,34 @@ class PersistentLocationController {
         return allSortedPoints
     }
     
-    func addMovementLocationEntity(movementLocation location: CLLocation, description: String = "Empty") {
+    func addMovementLocationEntity(movementLocation location: CLLocation) {
         let locationData = try? NSKeyedArchiver.archivedData(withRootObject: location, requiringSecureCoding: true)
-        if locationData == nil {
-            makePushNotification(title: "Error movement", information: "movement data is nil")
-        }
         let date = location.timestamp
-        let movementEntity = MovementLocationEntity(context: self.container.viewContext)
+        let movementEntity = MovementLocationEntity(context: self.managedObjectContext)
         movementEntity.date = date
         movementEntity.movementLocation = locationData
-        movementEntity.summary = description
         saveData()
-        addCheckLocationEntity(checkLocationToAdd: location)
-        
     }
     
-    func addVisitLocationEntity(visitLocation location: CLVisit, description: String = "Empty visit") {
+    func addVisitLocationEntity(visitLocation location: CLVisit) {
         let visitData = try? NSKeyedArchiver.archivedData(withRootObject: location, requiringSecureCoding: true)
-        if visitData == nil {
-            makePushNotification(title: "Error visit", information: "visit data is nil")
-        }
         let date = location.arrivalDate
-        let visitEntity = VisitedLocationEntity(context: self.container.viewContext)
+        let visitEntity = VisitLocationEntity(context: self.managedObjectContext)
         visitEntity.date = date
         visitEntity.visitedLocation = visitData
-        visitEntity.summary = description
         saveData()
     }
     
-    private func addCheckLocationEntity(checkLocationToAdd location: CLLocation, description: String? = "Empty") {
+    func addCheckLocationEntity(checkLocationToAdd location: CLLocation, description: String? = "Empty") {
         let locationData = try? NSKeyedArchiver.archivedData(withRootObject: location, requiringSecureCoding: true)
-        let checkEntity = CheckLocationEntity(context: self.container.viewContext)//MovementLocationEntity(context: self.container.viewContext)
+        let checkEntity = CheckLocationEntity(context: self.managedObjectContext)//MovementLocationEntity(context: self.container.viewContext)
         checkEntity.date = location.timestamp
         checkEntity.locationToCheck = locationData
         saveData()
     }
     
     func deleteCheckEntities(checkEntities entities: [CheckLocationEntity]) {
-        let context = self.container.viewContext
+        let context = self.managedObjectContext
         // Delete the objects from the context
         for entity in entities {
             context.delete(entity)
@@ -135,7 +163,7 @@ class PersistentLocationController {
         }
         let alreadyVisitedCountries = retrieveAllVisitedCountries2IsoCodes()
         if !alreadyVisitedCountries.contains(countryCode) {
-            let visitedCountryEntity = VisitedCountryEntity(context: self.container.viewContext)
+            let visitedCountryEntity = VisitedCountryEntity(context: self.managedObjectContext)
             visitedCountryEntity.iso2CountryCode = countryCode
             saveData()
         }
@@ -143,7 +171,7 @@ class PersistentLocationController {
     
     func fetchAllEntriesToCheck() -> [CheckLocationEntity]? {
         // Create a fetch request for the specified entity
-        let context = self.container.viewContext
+        let context = self.managedObjectContext
         let fetchRequest = NSFetchRequest<CheckLocationEntity>(entityName: "CheckLocationEntity")
         do {
             // Execute the fetch request and return the results
@@ -159,7 +187,7 @@ class PersistentLocationController {
         let fetchRequest = NSFetchRequest<VisitedCountryEntity>(entityName: "VisitedCountryEntity")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "iso2CountryCode", ascending: false)]
         let frController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                      managedObjectContext: self.container.viewContext,
+                                                      managedObjectContext: self.managedObjectContext,
                                                       sectionNameKeyPath: nil,
                                                       cacheName: nil)
         try? frController.performFetch()
@@ -180,7 +208,7 @@ class PersistentLocationController {
         let fetchRequest = NSFetchRequest<VisitedCountryEntity>(entityName: "VisitedCountryEntity")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "iso2CountryCode", ascending: false)]
         let frController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                      managedObjectContext: self.container.viewContext,
+                                                      managedObjectContext: self.managedObjectContext,
                                                       sectionNameKeyPath: nil,
                                                       cacheName: nil)
         try? frController.performFetch()
@@ -197,15 +225,28 @@ class PersistentLocationController {
         return result
     }
     
-    private func saveData() {
-        do {
-            try container.viewContext.save()// managedObjectContext.save()
-            //fetchMostRecentData()
-        } catch let error as NSError {
-            makePushNotification(title: "Error saving", information: "\(error)")
-            //NSLog("Unresolved error saving context: \(error), \(error.userInfo)")
+    private func fetchMostRecentData() {
+        //1.) For visitedLocations
+        try? fetchRequestVisitEntityController.performFetch()
+        if let newVisitedLocations = fetchRequestVisitEntityController.fetchedObjects {
+            self.savedVisitedLocations = newVisitedLocations
+        }
+        //2.) For movementLocations
+        try? fetchRequestMovementEntityController.performFetch()
+        if let newMovementLocation = fetchRequestMovementEntityController.fetchedObjects {
+            self.savedMovementLocations = newMovementLocation
         }
     }
+    
+    func saveData() {
+        do {
+            try managedObjectContext.save()
+            fetchMostRecentData()
+        } catch let error as NSError {
+            NSLog("Unresolved error saving context: \(error), \(error.userInfo)")
+        }
+    }
+    
     
     /// Gives back the movement locations as CLLocation sorted after descending date
     /// - Parameters:
@@ -218,7 +259,7 @@ class PersistentLocationController {
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         fetchRequest.predicate = predicate
         let frController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                      managedObjectContext: self.container.viewContext,
+                                                      managedObjectContext: self.managedObjectContext,
                                                       sectionNameKeyPath: nil,
                                                       cacheName: nil)
         try? frController.performFetch()
@@ -226,8 +267,8 @@ class PersistentLocationController {
         var lastAddedLocation: CLLocation? = nil
         if let locationData = frController.fetchedObjects {
             for locationDatum in locationData {
-                if let locationDate = locationDatum.date, let locationDescription = locationDatum.summary, let locationDatum = locationDatum.movementLocation, let tempLocation = try? NSKeyedUnarchiver.unarchivedObject(ofClass: CLLocation.self, from: locationDatum) {
-                    let location = MapLocation(coordinate: tempLocation.coordinate, time: locationDate, locationType: .movement, hAccuracy: tempLocation.horizontalAccuracy, locationDescription: locationDescription)
+                if let locationDate = locationDatum.date, let locationDatum = locationDatum.movementLocation, let tempLocation = try? NSKeyedUnarchiver.unarchivedObject(ofClass: CLLocation.self, from: locationDatum) {
+                    let location = MapLocation(coordinate: tempLocation.coordinate, time: locationDate, locationType: .movement, hAccuracy: tempLocation.horizontalAccuracy, locationDescription: "locationDescription")
                     if lastAddedLocation == nil || (lastAddedLocation != nil && lastAddedLocation!.timestamp != tempLocation.timestamp) {
                         searchedLocations.append(location)
                         lastAddedLocation = tempLocation
@@ -246,19 +287,19 @@ class PersistentLocationController {
     /// - Returns: visits as CLVisit sorted be descending date (newest date at position 0)
     private func getVisitLocationBetweenDates(startDateLongerAgo startDate: NSDate, endDateCloserToRightNow endDate: NSDate, desiredAccuracyInMeter: CLLocationAccuracy) -> [MapLocation] {
         let predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", startDate, endDate)
-        let fetchRequest = NSFetchRequest<VisitedLocationEntity>(entityName: "VisitedLocationEntity")
+        let fetchRequest = NSFetchRequest<VisitLocationEntity>(entityName: "VisitLocationEntity")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         fetchRequest.predicate = predicate
         let frController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                      managedObjectContext: self.container.viewContext,
+                                                      managedObjectContext: self.managedObjectContext,
                                                       sectionNameKeyPath: nil,
                                                       cacheName: nil)
         try? frController.performFetch()
         var searchedLocations = [MapLocation]()
         if let locationVisitData = frController.fetchedObjects {
             for locationDatum in locationVisitData {
-                if let locationDate = locationDatum.date, let locationDescription = locationDatum.summary, let locationDatum = locationDatum.visitedLocation, let tempLocation = try? NSKeyedUnarchiver.unarchivedObject(ofClass: CLVisit.self, from: locationDatum) {
-                    let location = MapLocation(coordinate: tempLocation.coordinate, time: locationDate, locationType: .visit, hAccuracy: tempLocation.horizontalAccuracy, locationDescription: locationDescription)
+                if let locationDate = locationDatum.date, let locationDatum = locationDatum.visitedLocation, let tempLocation = try? NSKeyedUnarchiver.unarchivedObject(ofClass: CLVisit.self, from: locationDatum) {
+                    let location = MapLocation(coordinate: tempLocation.coordinate, time: locationDate, locationType: .visit, hAccuracy: tempLocation.horizontalAccuracy, locationDescription: "locationDescription")
                     if location.hAccuracy < desiredAccuracyInMeter {
                         if let lastLocationAdded = searchedLocations.last {
                             if (lastLocationAdded.time.timeIntervalSince1970 - location.time.timeIntervalSince1970) < 0.1 {
@@ -288,7 +329,7 @@ class PersistentLocationController {
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         fetchRequest.fetchLimit = 1
         let frController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                      managedObjectContext: self.container.viewContext,
+                                                      managedObjectContext: self.managedObjectContext,
                                                       sectionNameKeyPath: nil,
                                                       cacheName: nil)
         try? frController.performFetch()
@@ -308,6 +349,43 @@ class PersistentLocationController {
         UNUserNotificationCenter.current().add(request)
     }
     
+}
+
+//
+//  PersistentStoreData.swift
+//  TrackLowEnergy
+//
+//  Created by Cedric Thesis on 07.03.24.
+//
+
+struct PersistentStoreData {
+
+    let container: NSPersistentContainer
+
+    init(inMemory: Bool = false) {
+        container = NSPersistentContainer(name: "PastLocations")
+        if inMemory {
+            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        }
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+    }
+    
+    var context: NSManagedObjectContext { container.viewContext }
+    
+    func saveContext () {
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch let error as NSError {
+                NSLog("Unresolved error saving context: \(error), \(error.userInfo)")
+            }
+        }
+    }
 }
 
 
