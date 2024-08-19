@@ -18,33 +18,40 @@ struct AllLocationsView: View {
     
     
     var body: some View {
-        VStack {
-            Map() {
-                UserAnnotation()
-                ForEach (locations) { location in
-                    Marker(location.time.description, coordinate: location.coordinate)
+        if locationProvider.authorizationStatus != .authorizedAlways {
+            VStack {
+                EnableTrackingInSettingsView()
+            }
+        } else {
+            VStack {
+                Map() {
+                    UserAnnotation()
+                    ForEach (locations) { location in
+                        Marker(location.time.description, coordinate: location.coordinate)
+                    }
+                    MapPolyline(coordinates: (locations).map{$0.coordinate})
+                        .mapOverlayLevel(level: .aboveRoads)
+                        .stroke(.black, lineWidth: 3)
+                        //.stroke(Gradient(colors: [.blue,.black]), lineWidth: 4)
                 }
-                MapPolyline(coordinates: (locations).map{$0.coordinate})
-                    .mapOverlayLevel(level: .aboveRoads)
-                    .stroke(.black, lineWidth: 3)
-                    //.stroke(Gradient(colors: [.blue,.black]), lineWidth: 4)
-            }
-            .onAppear() {
-                calculateLocationsToShow()
-            }
-            .onChange(of: locationsToShow) {
-                calculateLocationsToShow()
-            }
-            .onChange(of: daysToGoBack) {
-                calculateLocationsToShow()
-            }
-            .onChange(of: desiredAccuracy) {
-                calculateLocationsToShow()
+                .onAppear() {
+                    calculateLocationsToShow()
+                }
+                .onChange(of: locationsToShow) {
+                    calculateLocationsToShow()
+                }
+                .onChange(of: daysToGoBack) {
+                    calculateLocationsToShow()
+                }
+                .onChange(of: desiredAccuracy) {
+                    calculateLocationsToShow()
+                }
             }
         }
+
     }
     
-    private func calculateLocationsToShow() {
+    @MainActor private func calculateLocationsToShow() {
         switch locationsToShow {
         case .movement:
             locations = locationProvider.getMovementLocationFromStorage(daysToGoBack: daysToGoBack, desiredAccuracyInMeter: desiredAccuracy)

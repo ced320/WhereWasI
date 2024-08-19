@@ -12,8 +12,8 @@ import CoreLocation
 struct AchievementsView: View {
     
     @State var testLocation1 = CLLocation(latitude: 52.1665716019436, longitude: 11.65793975891662)
-    @State var countriesVisited = PersistentLocationController.shared.retrieveAllVisitedCountries()
-    let persistenceController = PersistentLocationController.shared
+    @State var countriesVisited = [Country]()// = PersistentLocationController.shared.retrieveAllVisitedCountries()
+    //let persistenceController = PersistentLocationController.shared
     @Binding var lastUpdatedCountryList: Double
     
     var body: some View {
@@ -27,6 +27,8 @@ struct AchievementsView: View {
         .onChange(of: lastUpdatedCountryList) {
             countriesVisited = PersistentLocationController.shared.retrieveAllVisitedCountries()
             print("change Timer")
+        }.onAppear() {
+            countriesVisited = PersistentLocationController.shared.retrieveAllVisitedCountries()
         }
     }
     

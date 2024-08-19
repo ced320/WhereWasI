@@ -8,7 +8,9 @@
 import CoreData
 import CoreLocation
 import OSLog
+import UserNotifications
 
+@MainActor
 class PersistentLocationController {
     static let shared = PersistentLocationController()
     
@@ -82,19 +84,26 @@ class PersistentLocationController {
         return allSortedPoints
     }
     
-    func addMovementLocationEntity(movementLocation location: CLLocation, description: String? = "Empty") {
+    func addMovementLocationEntity(movementLocation location: CLLocation, description: String = "Empty") {
         let locationData = try? NSKeyedArchiver.archivedData(withRootObject: location, requiringSecureCoding: true)
+        if locationData == nil {
+            makePushNotification(title: "Error movement", information: "movement data is nil")
+        }
         let date = location.timestamp
         let movementEntity = MovementLocationEntity(context: self.container.viewContext)
         movementEntity.date = date
         movementEntity.movementLocation = locationData
         movementEntity.summary = description
-        addCheckLocationEntityWithoutSaving(checkLocationToAdd: location)
         saveData()
+        addCheckLocationEntity(checkLocationToAdd: location)
+        
     }
     
-    func addVisitLocationEntity(visitLocation location: CLVisit, description: String? = "Empty visit") {
+    func addVisitLocationEntity(visitLocation location: CLVisit, description: String = "Empty visit") {
         let visitData = try? NSKeyedArchiver.archivedData(withRootObject: location, requiringSecureCoding: true)
+        if visitData == nil {
+            makePushNotification(title: "Error visit", information: "visit data is nil")
+        }
         let date = location.arrivalDate
         let visitEntity = VisitedLocationEntity(context: self.container.viewContext)
         visitEntity.date = date
@@ -103,11 +112,12 @@ class PersistentLocationController {
         saveData()
     }
     
-    private func addCheckLocationEntityWithoutSaving(checkLocationToAdd location: CLLocation, description: String? = "Empty") {
+    private func addCheckLocationEntity(checkLocationToAdd location: CLLocation, description: String? = "Empty") {
         let locationData = try? NSKeyedArchiver.archivedData(withRootObject: location, requiringSecureCoding: true)
         let checkEntity = CheckLocationEntity(context: self.container.viewContext)//MovementLocationEntity(context: self.container.viewContext)
         checkEntity.date = location.timestamp
         checkEntity.locationToCheck = locationData
+        saveData()
     }
     
     func deleteCheckEntities(checkEntities entities: [CheckLocationEntity]) {
@@ -116,12 +126,7 @@ class PersistentLocationController {
         for entity in entities {
             context.delete(entity)
         }
-        // Save the context to persist changes
-        do {
-            try context.save()
-        } catch {
-            logger.error("Failed to delete object: \(error)")
-        }
+        saveData()
     }
     
     func addCountryCode(isoCountryCode countryCode: String) {
@@ -197,7 +202,8 @@ class PersistentLocationController {
             try container.viewContext.save()// managedObjectContext.save()
             //fetchMostRecentData()
         } catch let error as NSError {
-            NSLog("Unresolved error saving context: \(error), \(error.userInfo)")
+            makePushNotification(title: "Error saving", information: "\(error)")
+            //NSLog("Unresolved error saving context: \(error), \(error.userInfo)")
         }
     }
     
@@ -289,6 +295,18 @@ class PersistentLocationController {
         return frController.fetchedObjects?.first
     }
     
+    private func makePushNotification(title: String, information: String) {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.subtitle = information
+        content.sound = UNNotificationSound.default
+        // show this notification five seconds from now
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        // choose a random identifier
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        // add our notification request
+        UNUserNotificationCenter.current().add(request)
+    }
     
 }
 

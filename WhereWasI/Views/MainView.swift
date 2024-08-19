@@ -23,59 +23,63 @@ struct MainView: View {
     @AppStorage("showDaysToGoBack") private var daysToGoBack = 1
     @AppStorage("desiredAccuracy") private var desiredAccuracyInMeter: CLLocationAccuracy = 250
     @AppStorage("lastUpdatedCountryList") private var lastUpdatedCountryList: Double = 0
+    @AppStorage("showedTutorial") private var showedTutorial: Bool = false
     let timer = Timer.publish(every: 70, tolerance: 3, on: .main, in: .common).autoconnect()
-
-    //@State var alwaysLocationTrackingEnabled = false
     
     var body: some View {
-        
-        TabView {
-            AllLocationsView(locationsToShow: $locationsToShow,daysToGoBack: $daysToGoBack, desiredAccuracy: $desiredAccuracyInMeter)
-                .environment(locationProvider)
-                .bottomSheet(bottomSheetPosition: self.$bottomSheetPosition, switchablePositions: [
-                    .relative(BottomSheetPositioning.small.rawValue),
-                    .relative(BottomSheetPositioning.medium.rawValue),
-                    .relative(BottomSheetPositioning.large.rawValue)
-                ], headerContent: {headLineView}) {
-                    //The list of the most popular songs of the artist.
-                    VStack {
-                        pickerLocationKind
-                        timeSlider
-                        accuracySlider
+        if !showedTutorial {
+            TutorialView(tutorialFinished: $showedTutorial)
+        } else {
+            TabView {
+                AllLocationsView(locationsToShow: $locationsToShow,daysToGoBack: $daysToGoBack, desiredAccuracy: $desiredAccuracyInMeter)
+                    .environment(locationProvider)
+                    .bottomSheet(bottomSheetPosition: self.$bottomSheetPosition, switchablePositions: [
+                        .relative(BottomSheetPositioning.small.rawValue),
+                        .relative(BottomSheetPositioning.medium.rawValue),
+                        .relative(BottomSheetPositioning.large.rawValue)
+                    ], headerContent: {headLineView}) {
+                        //The list of the most popular songs of the artist.
+                        VStack {
+                            pickerLocationKind
+                            timeSlider
+                            accuracySlider
 
+                            
+                        }
+                        .padding()
                         
-                    }
-                    .padding()
-                    
 
-                }
-                .customAnimation(.snappy.speed(2))//(.easeIn.speed(3)) //.linear.speed(1.5))
-                .customBackground(.thickMaterial)
-                .tabItem {
-                    Image(systemName: "mappin.and.ellipse")
-                    Text("Recent locations")
-                }
-            AchievementsView(lastUpdatedCountryList: $lastUpdatedCountryList)
-                .environment(locationProvider)
-                .tabItem {
-                    Image(systemName: "star")
-                    Text("Achievements")
-                }
-            EnableLocationTrackingView()
-                .tabItem {
-                    Image(systemName: "gearshape")
-                    Text("Settings")
-                }
+                    }
+                    .customAnimation(.snappy.speed(2))//(.easeIn.speed(3)) //.linear.speed(1.5))
+                    .customBackground(.thickMaterial)
+                    .tabItem {
+                        Image(systemName: "mappin.and.ellipse")
+                        Text("Recent locations")
+                    }
+                AchievementsView(lastUpdatedCountryList: $lastUpdatedCountryList)
+                    .environment(locationProvider)
+                    .tabItem {
+                        Image(systemName: "star")
+                        Text("Achievements")
+                    }
+                EnableLocationTrackingView()
+                    .tabItem {
+                        Image(systemName: "gearshape")
+                        Text("Settings")
+                    }
+            }
+            .onChange(of: timeSliderValue) {
+                updateDaysToGoBack()
+            }
+            .onReceive(timer) { time in
+                coordinatesToCountryCode()
+            }
+            .onAppear() {
+                coordinatesToCountryCode()
+            }
+
         }
-        .onChange(of: timeSliderValue) {
-            updateDaysToGoBack()
-        }
-        .onReceive(timer) { time in
-            coordinatesToCountryCode()
-        }
-        .onAppear() {
-            coordinatesToCountryCode()
-        }
+        
     }
     
     var headLineView: some View {
@@ -112,11 +116,11 @@ struct MainView: View {
     
     var accuracySlider: some View {
         VStack {
-            Slider(value: $desiredAccuracyInMeter, in: 10...1000, step: 1) {
+            Slider(value: $desiredAccuracyInMeter, in: 10...15000, step: 1) {
                 } minimumValueLabel: {
                     Text("10m")
                 } maximumValueLabel: {
-                    Text("1000m")
+                    Text("15000m")
                 }
                 Text("Selected GPS Accuracy is \(desiredAccuracyInMeter) meters")
         }
@@ -136,7 +140,7 @@ struct MainView: View {
         daysToGoBack = Int(timeSliderValue)
     }
     
-    private func coordinatesToCountryCode() {
+    @MainActor private func coordinatesToCountryCode() {
         let timeSinceLastCheck = abs(Date().timeIntervalSince1970 - lastUpdatedCountryList)
         if timeSinceLastCheck < 65 {
             return

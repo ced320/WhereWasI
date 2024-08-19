@@ -20,7 +20,7 @@ final class PersistenceLocationsTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testSortedOfLocations() {
+    @MainActor func testSortedOfLocations() {
         let currentDate = Date()
         //        let visit1 = MapLocation(coordinate: CLLocationCoordinate2D(latitude: 48.759190007218814, longitude: 40), time: Date(timeIntervalSince1970: currentDate.timeIntervalSince1970 - 2), locationType: .visit, hAccuracy: 0, locationDescription: "V2")
         //        let visit2 = MapLocation(coordinate: CLLocationCoordinate2D(latitude: 48.859190007218814, longitude: 40), time: Date(timeIntervalSince1970: currentDate.timeIntervalSince1970 - 3), locationType: .visit, hAccuracy: 0, locationDescription: "V1")
@@ -36,7 +36,7 @@ final class PersistenceLocationsTest: XCTestCase {
         XCTAssertEqual(result[2].locationDescription, "3")
     }
     
-    func testSortedVisits() {
+    @MainActor func testSortedVisits() {
         let currentDate = Date()
         let visit1 = MapLocation(coordinate: CLLocationCoordinate2D(latitude: 48.759190007218814, longitude: 40), time: Date(timeIntervalSince1970: currentDate.timeIntervalSince1970 - 1), locationType: .visit, hAccuracy: 0, locationDescription: "V1")
         let visit2 = MapLocation(coordinate: CLLocationCoordinate2D(latitude: 48.859190007218814, longitude: 40), time: Date(timeIntervalSince1970: currentDate.timeIntervalSince1970 - 2), locationType: .visit, hAccuracy: 0, locationDescription: "V2")
@@ -51,7 +51,7 @@ final class PersistenceLocationsTest: XCTestCase {
 
     }
     
-    func testSortingVisitsAndMovements1() {
+    @MainActor func testSortingVisitsAndMovements1() {
         let currentDate = Date()
         let movements = [MapLocation(coordinate: CLLocationCoordinate2D(latitude: 48.959190007218814, longitude: 40), time: Date(timeIntervalSince1970: currentDate.timeIntervalSince1970 - 1), locationType: .movement, hAccuracy: 0, locationDescription: "M1"),
                          MapLocation(coordinate: CLLocationCoordinate2D(latitude: 48.859190007218814, longitude: 40), time: Date(timeIntervalSince1970: currentDate.timeIntervalSince1970 - 3), locationType: .movement, hAccuracy: 0, locationDescription: "M2"),
@@ -70,7 +70,7 @@ final class PersistenceLocationsTest: XCTestCase {
         XCTAssertEqual(result[5].locationDescription, "V3")
     }
     
-    func testSortingVisitsAndMovements2() {
+    @MainActor func testSortingVisitsAndMovements2() {
         let currentDate = Date()
         let movements = [MapLocation(coordinate: CLLocationCoordinate2D(latitude: 48.959190007218814, longitude: 40), time: Date(timeIntervalSince1970: currentDate.timeIntervalSince1970 - 1), locationType: .movement, hAccuracy: 0, locationDescription: "M1"),
                          MapLocation(coordinate: CLLocationCoordinate2D(latitude: 48.859190007218814, longitude: 40), time: Date(timeIntervalSince1970: currentDate.timeIntervalSince1970 - 2), locationType: .movement, hAccuracy: 0, locationDescription: "M2"),
@@ -89,7 +89,7 @@ final class PersistenceLocationsTest: XCTestCase {
         XCTAssertEqual(result[5].locationDescription, "V3")
     }
     
-    func testSortingVisitsAndMovements3() {
+    @MainActor func testSortingVisitsAndMovements3() {
         let currentDate = Date()
         let movements = [MapLocation(coordinate: CLLocationCoordinate2D(latitude: 48.959190007218814, longitude: 40), time: Date(timeIntervalSince1970: currentDate.timeIntervalSince1970 - 1), locationType: .movement, hAccuracy: 0, locationDescription: "M1")]
         let visits = [MapLocation(coordinate: CLLocationCoordinate2D(latitude: 48.759190007218814, longitude: 40), time: Date(timeIntervalSince1970: currentDate.timeIntervalSince1970 - 2), locationType: .visit, hAccuracy: 0, locationDescription: "V1"),
@@ -104,7 +104,7 @@ final class PersistenceLocationsTest: XCTestCase {
         XCTAssertEqual(result[3].locationDescription, "V3")
     }
     
-    func testSortingVisitsAndMovements4() {
+    @MainActor func testSortingVisitsAndMovements4() {
         let currentDate = Date()
         let movements = [MapLocation(coordinate: CLLocationCoordinate2D(latitude: 48.959190007218814, longitude: 40), time: Date(timeIntervalSince1970: currentDate.timeIntervalSince1970 - 1), locationType: .movement, hAccuracy: 0, locationDescription: "M1"),
                          MapLocation(coordinate: CLLocationCoordinate2D(latitude: 48.859190007218814, longitude: 40), time: Date(timeIntervalSince1970: currentDate.timeIntervalSince1970 - 3), locationType: .movement, hAccuracy: 0, locationDescription: "M2"),

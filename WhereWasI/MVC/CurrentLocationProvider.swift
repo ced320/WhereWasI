@@ -18,31 +18,24 @@ import CoreLocation
         super.init()
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.requestAlwaysAuthorization()
         self.locationManager.startMonitoringSignificantLocationChanges()
         self.locationManager.startMonitoringVisits()
         //self.locationManager.startUpdatingLocation()
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    @MainActor func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        if let lastAddedLocationDate = PersistentLocationController.shared.getNewestMovementLocation()?.date {
-            if lastAddedLocationDate != location.timestamp {
-                PersistentLocationController.shared.addMovementLocationEntity(movementLocation: location)
-            } else {
-                return
-            }
-        } else {
-            PersistentLocationController.shared.addMovementLocationEntity(movementLocation: location)
-        }
-        
-        
+        PersistentLocationController.shared.addMovementLocationEntity(movementLocation: location)
     }
     
-    func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
-        self.makePushNotification(title: "Added visit", information: "")
+    @MainActor func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
+        //self.makePushNotification(title: "Added visit", information: "")
         PersistentLocationController.shared.addVisitLocationEntity(visitLocation: visit)
 
+    }
+    
+    func requestAuthorizationWhenInUse() {
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -63,15 +56,15 @@ import CoreLocation
         }
     }
     
-    func getVisitedLocationFromStorage(daysToGoBack days: Int, desiredAccuracyInMeter: CLLocationAccuracy) -> [MapLocation] {
+    @MainActor func getVisitedLocationFromStorage(daysToGoBack days: Int, desiredAccuracyInMeter: CLLocationAccuracy) -> [MapLocation] {
         PersistentLocationController.shared.getPastVisits(daysToGoBack: days, desiredAccuracyOfLocations: desiredAccuracyInMeter)
     }
     
-    func getMovementLocationFromStorage(daysToGoBack days: Int, desiredAccuracyInMeter: CLLocationAccuracy) -> [MapLocation] {
+    @MainActor func getMovementLocationFromStorage(daysToGoBack days: Int, desiredAccuracyInMeter: CLLocationAccuracy) -> [MapLocation] {
         PersistentLocationController.shared.getPastMovements(daysToGoBack: days, desiredAccuracyOfLocations: desiredAccuracyInMeter)
     }
     
-    func getAllLocationsStored(daysToGoBack days: Int, desiredAccuracyInMeter: CLLocationAccuracy) -> [MapLocation] {
+    @MainActor func getAllLocationsStored(daysToGoBack days: Int, desiredAccuracyInMeter: CLLocationAccuracy) -> [MapLocation] {
         PersistentLocationController.shared.getAllPastLocations(daysToGoBack: days, desiredAccuracyOfLocations: desiredAccuracyInMeter)
     }
     

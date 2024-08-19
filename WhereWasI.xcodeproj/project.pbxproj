@@ -19,6 +19,10 @@
 		901C0AEB2C5280DB00811AA5 /* AllLocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AEA2C5280DB00811AA5 /* AllLocationsView.swift */; };
 		901C0AEF2C5289A100811AA5 /* HeadlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AEE2C5289A100811AA5 /* HeadlineView.swift */; };
 		901C0AF12C528CD200811AA5 /* EnableLocationTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AF02C528CD200811AA5 /* EnableLocationTrackingView.swift */; };
+		9045F8D22C734BAC00235860 /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9045F8D12C734BAC00235860 /* TutorialView.swift */; };
+		9045F8D42C734D6200235860 /* RequestAuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9045F8D32C734D6200235860 /* RequestAuthorizationManager.swift */; };
+		9045F8D72C73595E00235860 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9045F8D62C73595E00235860 /* Settings.swift */; };
+		9045F8D92C73621D00235860 /* EnableTrackingInSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9045F8D82C73621D00235860 /* EnableTrackingInSettingsView.swift */; };
 		9068F2432C53C17800084D4D /* ShowableLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9068F2422C53C17800084D4D /* ShowableLocations.swift */; };
 		90B402812C63646800122691 /* WhereWasITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B402802C63646800122691 /* WhereWasITests.swift */; };
 		90B402882C6365ED00122691 /* PersistenceLocationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B402872C6365ED00122691 /* PersistenceLocationsTest.swift */; };
@@ -27,7 +31,6 @@
 		90B4028F2C64BF6300122691 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B4028E2C64BF6300122691 /* AchievementsView.swift */; };
 		90B402912C64BF9D00122691 /* AchievementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B402902C64BF9D00122691 /* AchievementController.swift */; };
 		90B402942C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 90B402922C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodeld */; };
-		90E90D2B2C6B5F9B005C31E5 /* PersistentCountriesAddedInBackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E90D2A2C6B5F9B005C31E5 /* PersistentCountriesAddedInBackgroundController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,10 @@
 		901C0AEA2C5280DB00811AA5 /* AllLocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllLocationsView.swift; sourceTree = "<group>"; };
 		901C0AEE2C5289A100811AA5 /* HeadlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadlineView.swift; sourceTree = "<group>"; };
 		901C0AF02C528CD200811AA5 /* EnableLocationTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableLocationTrackingView.swift; sourceTree = "<group>"; };
+		9045F8D12C734BAC00235860 /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
+		9045F8D32C734D6200235860 /* RequestAuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAuthorizationManager.swift; sourceTree = "<group>"; };
+		9045F8D62C73595E00235860 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		9045F8D82C73621D00235860 /* EnableTrackingInSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableTrackingInSettingsView.swift; sourceTree = "<group>"; };
 		9068F2422C53C17800084D4D /* ShowableLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowableLocations.swift; sourceTree = "<group>"; };
 		90B4027E2C63646800122691 /* WhereWasITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhereWasITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		90B402802C63646800122691 /* WhereWasITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereWasITests.swift; sourceTree = "<group>"; };
@@ -64,7 +71,6 @@
 		90B4028E2C64BF6300122691 /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
 		90B402902C64BF9D00122691 /* AchievementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementController.swift; sourceTree = "<group>"; };
 		90B402932C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PersistentAchievementsInfo.xcdatamodel; sourceTree = "<group>"; };
-		90E90D2A2C6B5F9B005C31E5 /* PersistentCountriesAddedInBackgroundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentCountriesAddedInBackgroundController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +138,7 @@
 		901057E02C516CCD00AB6502 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9045F8D52C7352AF00235860 /* Introduction */,
 				901C0AE82C527F6200811AA5 /* MainView.swift */,
 				901C0AEA2C5280DB00811AA5 /* AllLocationsView.swift */,
 				901C0AEE2C5289A100811AA5 /* HeadlineView.swift */,
@@ -147,7 +154,7 @@
 				901C0AE02C5251E100811AA5 /* PersistenceLocationsController.swift */,
 				90138C4D2C51717F00FD0386 /* CurrentLocationProvider.swift */,
 				90B402902C64BF9D00122691 /* AchievementController.swift */,
-				90E90D2A2C6B5F9B005C31E5 /* PersistentCountriesAddedInBackgroundController.swift */,
+				9045F8D32C734D6200235860 /* RequestAuthorizationManager.swift */,
 			);
 			path = MVC;
 			sourceTree = "<group>";
@@ -158,6 +165,7 @@
 				90138C4F2C517CE900FD0386 /* MapLocation.swift */,
 				901C0AE22C52529C00811AA5 /* PastLocations.xcdatamodeld */,
 				90B4028B2C64BDF600122691 /* Achievement */,
+				9045F8D62C73595E00235860 /* Settings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -167,6 +175,15 @@
 			children = (
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		9045F8D52C7352AF00235860 /* Introduction */ = {
+			isa = PBXGroup;
+			children = (
+				9045F8D12C734BAC00235860 /* TutorialView.swift */,
+				9045F8D82C73621D00235860 /* EnableTrackingInSettingsView.swift */,
+			);
+			path = Introduction;
 			sourceTree = "<group>";
 		};
 		9068F2412C53C11800084D4D /* Enums */ = {
@@ -308,16 +325,19 @@
 				901C0AF12C528CD200811AA5 /* EnableLocationTrackingView.swift in Sources */,
 				90B4028D2C64BE1200122691 /* Country.swift in Sources */,
 				90138C4E2C51717F00FD0386 /* CurrentLocationProvider.swift in Sources */,
+				9045F8D72C73595E00235860 /* Settings.swift in Sources */,
 				901C0AE12C5251E100811AA5 /* PersistenceLocationsController.swift in Sources */,
 				90B402912C64BF9D00122691 /* AchievementController.swift in Sources */,
 				90138C502C517CE900FD0386 /* MapLocation.swift in Sources */,
-				90E90D2B2C6B5F9B005C31E5 /* PersistentCountriesAddedInBackgroundController.swift in Sources */,
+				9045F8D92C73621D00235860 /* EnableTrackingInSettingsView.swift in Sources */,
+				9045F8D22C734BAC00235860 /* TutorialView.swift in Sources */,
 				901C0AE42C52529C00811AA5 /* PastLocations.xcdatamodeld in Sources */,
 				90B4028F2C64BF6300122691 /* AchievementsView.swift in Sources */,
 				901057B62C516A3500AB6502 /* WhereWasIApp.swift in Sources */,
 				90B4028A2C64BD9B00122691 /* Achievement.swift in Sources */,
 				901C0AEF2C5289A100811AA5 /* HeadlineView.swift in Sources */,
 				90B402942C64C07C00122691 /* PersistentAchievementsInfo.xcdatamodeld in Sources */,
+				9045F8D42C734D6200235860 /* RequestAuthorizationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
