@@ -1,5 +1,5 @@
 This programm automatically detects where the user visited and moved and provides this data on a map.
-The movement and visits data is stored automatically persistently in an energy efficent manner even if the app is closed bya the user.
+The movement and visits data is stored automatically persistently in an energy efficent manner even if the app is closed by the user.
 
 MIT License
 
