@@ -12,13 +12,10 @@ struct WhereWasIApp: App {
     
     @State private var locationProvider = CurrentLocationProvider()
     
-    //let persistenceController = PersistenceController.shared
-    
     var body: some Scene {
         WindowGroup {
             MainView()
                 .environment(locationProvider)
-                //.environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

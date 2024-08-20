@@ -21,7 +21,6 @@
 		901C0AF12C528CD200811AA5 /* EnableLocationTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C0AF02C528CD200811AA5 /* EnableLocationTrackingView.swift */; };
 		9045F8D22C734BAC00235860 /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9045F8D12C734BAC00235860 /* TutorialView.swift */; };
 		9045F8D42C734D6200235860 /* RequestAuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9045F8D32C734D6200235860 /* RequestAuthorizationManager.swift */; };
-		9045F8D72C73595E00235860 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9045F8D62C73595E00235860 /* Settings.swift */; };
 		9045F8D92C73621D00235860 /* EnableTrackingInSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9045F8D82C73621D00235860 /* EnableTrackingInSettingsView.swift */; };
 		9068F2432C53C17800084D4D /* ShowableLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9068F2422C53C17800084D4D /* ShowableLocations.swift */; };
 		90B402812C63646800122691 /* WhereWasITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B402802C63646800122691 /* WhereWasITests.swift */; };
@@ -30,6 +29,8 @@
 		90B4028D2C64BE1200122691 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B4028C2C64BE1200122691 /* Country.swift */; };
 		90B4028F2C64BF6300122691 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B4028E2C64BF6300122691 /* AchievementsView.swift */; };
 		90B402912C64BF9D00122691 /* AchievementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B402902C64BF9D00122691 /* AchievementController.swift */; };
+		90BE95872C74A027002F1CF8 /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BE95862C74A027002F1CF8 /* PushNotificationManager.swift */; };
+		90BE958A2C74AA13002F1CF8 /* E_CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BE95892C74AA13002F1CF8 /* E_CLLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +60,6 @@
 		901C0AF02C528CD200811AA5 /* EnableLocationTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableLocationTrackingView.swift; sourceTree = "<group>"; };
 		9045F8D12C734BAC00235860 /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
 		9045F8D32C734D6200235860 /* RequestAuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAuthorizationManager.swift; sourceTree = "<group>"; };
-		9045F8D62C73595E00235860 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		9045F8D82C73621D00235860 /* EnableTrackingInSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableTrackingInSettingsView.swift; sourceTree = "<group>"; };
 		9068F2422C53C17800084D4D /* ShowableLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowableLocations.swift; sourceTree = "<group>"; };
 		90B4027E2C63646800122691 /* WhereWasITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhereWasITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +69,8 @@
 		90B4028C2C64BE1200122691 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		90B4028E2C64BF6300122691 /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
 		90B402902C64BF9D00122691 /* AchievementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementController.swift; sourceTree = "<group>"; };
+		90BE95862C74A027002F1CF8 /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
+		90BE95892C74AA13002F1CF8 /* E_CLLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = E_CLLocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,13 +113,14 @@
 		901057B42C516A3500AB6502 /* WhereWasI */ = {
 			isa = PBXGroup;
 			children = (
-				9068F2412C53C11800084D4D /* Enums */,
-				90138C512C517E0600FD0386 /* Protocols */,
 				901057E32C516E9400AB6502 /* Info.plist */,
 				901057B52C516A3500AB6502 /* WhereWasIApp.swift */,
 				901057E02C516CCD00AB6502 /* Views */,
 				901057E12C516CD500AB6502 /* MVC */,
 				901057E22C516CDD00AB6502 /* Model */,
+				90BE95882C74A9F8002F1CF8 /* Extensions */,
+				9068F2412C53C11800084D4D /* Enums */,
+				90138C512C517E0600FD0386 /* Protocols */,
 				901057B92C516A3800AB6502 /* Assets.xcassets */,
 				901057BE2C516A3800AB6502 /* WhereWasI.entitlements */,
 				901057BB2C516A3800AB6502 /* Preview Content */,
@@ -153,6 +156,7 @@
 				90138C4D2C51717F00FD0386 /* CurrentLocationProvider.swift */,
 				90B402902C64BF9D00122691 /* AchievementController.swift */,
 				9045F8D32C734D6200235860 /* RequestAuthorizationManager.swift */,
+				90BE95862C74A027002F1CF8 /* PushNotificationManager.swift */,
 			);
 			path = MVC;
 			sourceTree = "<group>";
@@ -163,7 +167,6 @@
 				90138C4F2C517CE900FD0386 /* MapLocation.swift */,
 				901C0AE22C52529C00811AA5 /* PastLocations.xcdatamodeld */,
 				90B4028B2C64BDF600122691 /* Achievement */,
-				9045F8D62C73595E00235860 /* Settings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -208,6 +211,14 @@
 				90B4028C2C64BE1200122691 /* Country.swift */,
 			);
 			path = Achievement;
+			sourceTree = "<group>";
+		};
+		90BE95882C74A9F8002F1CF8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				90BE95892C74AA13002F1CF8 /* E_CLLocation.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,14 +332,15 @@
 				9068F2432C53C17800084D4D /* ShowableLocations.swift in Sources */,
 				901C0AF12C528CD200811AA5 /* EnableLocationTrackingView.swift in Sources */,
 				90B4028D2C64BE1200122691 /* Country.swift in Sources */,
+				90BE958A2C74AA13002F1CF8 /* E_CLLocation.swift in Sources */,
 				90138C4E2C51717F00FD0386 /* CurrentLocationProvider.swift in Sources */,
-				9045F8D72C73595E00235860 /* Settings.swift in Sources */,
 				901C0AE12C5251E100811AA5 /* PersistenceLocationsController.swift in Sources */,
 				90B402912C64BF9D00122691 /* AchievementController.swift in Sources */,
 				90138C502C517CE900FD0386 /* MapLocation.swift in Sources */,
 				9045F8D92C73621D00235860 /* EnableTrackingInSettingsView.swift in Sources */,
 				9045F8D22C734BAC00235860 /* TutorialView.swift in Sources */,
 				901C0AE42C52529C00811AA5 /* PastLocations.xcdatamodeld in Sources */,
+				90BE95872C74A027002F1CF8 /* PushNotificationManager.swift in Sources */,
 				90B4028F2C64BF6300122691 /* AchievementsView.swift in Sources */,
 				901057B62C516A3500AB6502 /* WhereWasIApp.swift in Sources */,
 				90B4028A2C64BD9B00122691 /* Achievement.swift in Sources */,

@@ -15,9 +15,5 @@ import Contacts
     
 }
 
-extension CLLocation {
-    func placemark(completion: @escaping (_ placemark: CLPlacemark?, _ error: Error?) -> ()) {
-        CLGeocoder().reverseGeocodeLocation(self) { completion($0?.first, $1) }
-    }
-}
+
 

@@ -24,6 +24,13 @@ struct TutorialView: View {
             requestAlwaysAuthorizationView
         case .allPermissionReceived:
             Button("All permissions received. You can now use the app") {
+                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                        if success {
+                            print("Permission approved!")
+                        } else if let error = error {
+                            print(error.localizedDescription)
+                        }
+                    }
                 tutorialFinished = true
             }
         case .settingsRequired:
@@ -56,6 +63,8 @@ struct TutorialView: View {
             }
         }
     }
+    
+
     
 
     

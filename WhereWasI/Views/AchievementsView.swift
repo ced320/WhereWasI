@@ -23,6 +23,9 @@ struct AchievementsView: View {
             List(countriesVisited) {
                 Text("\($0.flag) \($0.countryName)")
             }
+            .refreshable {
+                coordinatesToCountryCode()
+            }
         }
         .onChange(of: lastUpdatedCountryList) {
             countriesVisited = PersistentLocationController.shared.retrieveAllVisitedCountries()
@@ -31,6 +34,40 @@ struct AchievementsView: View {
             countriesVisited = PersistentLocationController.shared.retrieveAllVisitedCountries()
         }
     }
+    
+    @MainActor private func coordinatesToCountryCode() {
+        PushNotificationManager.sendMessage(delayFromNow: 5, title: "Debug", subtitle: "called coordinate to country")
+        let timeSinceLastCheck = abs(Date().timeIntervalSince1970 - lastUpdatedCountryList)
+        if timeSinceLastCheck < 65 {
+            return
+        }
+        //1.) Retrive locations
+        guard var entitiesToCheck = PersistentLocationController.shared.fetchAllEntriesToCheck() else {return}
+        //2.) Do checks
+        if entitiesToCheck.count > 35 {
+            entitiesToCheck = Array(entitiesToCheck.prefix(30))
+        }
+        var entitiesAlreadyChecked = [CheckLocationEntity]()
+        for entity in entitiesToCheck {
+            if let locationToCheck = entity.locationToCheck, let tempLocation = try? NSKeyedUnarchiver.unarchivedObject(ofClass: CLLocation.self, from: locationToCheck) {
+                tempLocation.placemark { placemark, error in
+                    guard let placemark = placemark else {
+                        //logger.error(error?.localizedDescription)
+                        return
+                    }
+                    if let countryCode = placemark.isoCountryCode {
+                        PersistentLocationController.shared.addCountryCode(isoCountryCode: countryCode)
+                    }
+                }
+            }
+            entitiesAlreadyChecked.append(entity)
+        }
+        //3.) Delete checked
+        PersistentLocationController.shared.deleteCheckEntities(checkEntities: entitiesAlreadyChecked)
+        //4.) Set new lastCheckedDate
+        lastUpdatedCountryList = Date().timeIntervalSince1970
+    }
+
     
 
     

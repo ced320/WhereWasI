@@ -38,7 +38,7 @@ struct EnableLocationTrackingView: View {
             }
             VStack {
                 Button("Make push notification") {
-                    makePushNotification(title: "Test", information: "successful")
+                    PushNotificationManager.sendMessage(delayFromNow: 1, title: "Test", subtitle: "succesfull")
                 }
                 Button("Push Notifications") {
                     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
@@ -51,19 +51,6 @@ struct EnableLocationTrackingView: View {
                 }
             }
         }.padding()
-    }
-    
-    private func makePushNotification(title: String, information: String) {
-        let content = UNMutableNotificationContent()
-        content.title = title
-        content.subtitle = information
-        content.sound = UNNotificationSound.default
-        // show this notification five seconds from now
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        // choose a random identifier
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        // add our notification request
-        UNUserNotificationCenter.current().add(request)
     }
 }
 

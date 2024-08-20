@@ -35,10 +35,6 @@ import CoreLocation
 
     }
     
-    func requestAuthorizationWhenInUse() {
-        
-    }
-    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         DispatchQueue.main.async {
             self.authorizationStatus = status
